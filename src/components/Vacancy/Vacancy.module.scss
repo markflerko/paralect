@@ -1,15 +1,14 @@
 @import 'src/assets/styles/mixins';
 
 .FirstRowContainer {
-  // @include textEllipsis; //why not working placed here?
-
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 0.7rem;
+}
 
+.Title {
   @include textEllipsis;
-
 }
 
 .SecondRowContainer {
@@ -30,7 +29,8 @@
 
 .Star img {
   margin-top: 4px;
-  width: 100%;
+  height: 22px;
+  width: 22px;
 }
 
 .Location img {

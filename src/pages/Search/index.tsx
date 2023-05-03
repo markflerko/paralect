@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { FilterTab } from 'components/FilterTab/FilterTab';
 import { useEffect, useState } from 'react';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
@@ -26,18 +27,23 @@ export function Search() {
 
   return (
     <div className={styles.Container}>
-      <SearchBar />
-      {vacancies.map((vacancy) => (
-        <Vacancy
-          currency={vacancy?.currency}
-          payment_amount_from={vacancy?.payment_from}
-          payment_amount_to={vacancy?.payment_to}
-          profession={vacancy?.profession}
-          town={vacancy?.town?.title}
-          typeOfWork={vacancy?.type_of_work?.title}
-          key={vacancy?.id}
-        />
-      ))}
+      <div className={styles.FilterTabContainer}>
+        <FilterTab />
+      </div>
+      <div className={styles.SearchBarAndVacanciesContainer}>
+        <SearchBar />
+        {vacancies.map((vacancy) => (
+          <Vacancy
+            currency={vacancy?.currency}
+            payment_amount_from={vacancy?.payment_from}
+            payment_amount_to={vacancy?.payment_to}
+            profession={vacancy?.profession}
+            town={vacancy?.town?.title}
+            typeOfWork={vacancy?.type_of_work?.title}
+            key={vacancy?.id}
+          />
+        ))}
+      </div>
     </div>
   );
 }

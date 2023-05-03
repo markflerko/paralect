@@ -1,0 +1,21 @@
+.Container {
+  display: flex;
+  width: 315px;
+}
+
+.FirstRowContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.CancelContainer {
+  display: flex;
+  margin-top: 6px;
+}
+
+.Cancel img {
+  margin-top: 3px;
+  height: 18px;
+  width: 18px;
+}
