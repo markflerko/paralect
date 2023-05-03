@@ -1,10 +1,9 @@
 import axios from 'axios';
-import { lazy, useEffect, useState } from 'react';
+import FilterTab from 'components/FilterTab/FilterTab';
+import { useEffect, useState } from 'react';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Search.module.scss';
-
-const FilterTab = lazy(() => import('components/FilterTab/FilterTab'));
 
 export function Search() {
   const [vacancies, setVacancies] = useState<Record<string, any>[]>([]);
