@@ -1,20 +1,24 @@
+@import 'src/assets/styles/mixins';
+
 .FirstRowContainer {
+  // @include textEllipsis; //why not working placed here?
+
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   margin-bottom: 0.7rem;
 
-  > .Title {
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  @include textEllipsis;
+
 }
 
 .SecondRowContainer {
+  > * {
+    @include textEllipsis;
+  }
+
   display: flex;
+  width: 100%;
   gap: 1rem;
   margin-bottom: 0.7rem;
 }

@@ -1,8 +1,8 @@
 import { Paper, Text, Title } from '@mantine/core';
 import { FC } from 'react';
-import Dot from './Dot.svg';
-import Location from './Location.svg';
-import Star from './Star.svg';
+import Dot from 'assets/images/Dot.svg';
+import Location from 'assets/images/Location.svg';
+import Star from 'assets/images/Star.svg';
 import styles from './Vacancy.module.scss';
 
 export type VacancyProps = {
@@ -23,7 +23,7 @@ export const Vacancy: FC<VacancyProps> = ({
   currency,
 }) => {
   return (
-    <Paper shadow="xs" radius="lg" p="lg" m="lg">
+    <Paper shadow="xs" radius="lg" p="lg" m="sm">
       <div className={styles.FirstRowContainer}>
         <Title order={3} color="#5E96FC" className={styles.Title}>
           {profession}

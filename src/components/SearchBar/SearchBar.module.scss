@@ -1,0 +1,12 @@
+.SearchBar {
+  display: flex;
+  margin-bottom: 0.7rem;
+
+  .Input {
+    flex-grow: 1; //why it became full row?
+  }
+}
+
+.SearchIcon {
+  margin-top: 4px;
+}

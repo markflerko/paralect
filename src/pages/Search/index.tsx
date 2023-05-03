@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Search.module.scss';
 
@@ -25,6 +26,7 @@ export function Search() {
 
   return (
     <div className={styles.Container}>
+      <SearchBar />
       {vacancies.map((vacancy) => (
         <Vacancy
           currency={vacancy?.currency}

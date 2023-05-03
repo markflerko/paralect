@@ -1,7 +1,7 @@
 import { Header, Text } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
-import Logo from './Logo.svg';
+import Logo from 'assets/images/Logo.svg';
 
 export const CustomHeader = () => {
   const navigate = useNavigate();
