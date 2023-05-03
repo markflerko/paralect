@@ -25,21 +25,17 @@ export function Search() {
 
   return (
     <div className={styles.Container}>
-      <ul>
-        {vacancies.map((vacancy) => (
-          <Vacancy
-            currency={vacancy?.currency}
-            firm_name={vacancy?.firm_name}
-            industry={vacancy?.catalogues[0]?.title}
-            payment_amount_from={vacancy?.payment_from}
-            payment_amount_to={vacancy?.payment_to}
-            profession={vacancy?.profession}
-            town={vacancy?.town?.title}
-            typeOfWork={vacancy?.type_of_work?.title}
-            id={vacancy?.id}
-          />
-        ))}
-      </ul>
+      {vacancies.map((vacancy) => (
+        <Vacancy
+          currency={vacancy?.currency}
+          payment_amount_from={vacancy?.payment_from}
+          payment_amount_to={vacancy?.payment_to}
+          profession={vacancy?.profession}
+          town={vacancy?.town?.title}
+          typeOfWork={vacancy?.type_of_work?.title}
+          key={vacancy?.id}
+        />
+      ))}
     </div>
   );
 }

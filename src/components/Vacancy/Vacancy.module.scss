@@ -1,21 +1,35 @@
-.CustomHeader {
+.FirstRowContainer {
   display: flex;
-  align-items: center;
-  padding: 0 8rem;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+
+  > .Title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
-.Logo img {
-  height: 30px;
+.SecondRowContainer {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.ThirdRowContainer {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.Star img {
+  margin-top: 4px;
   width: 100%;
 }
 
-.Menu {
-  display: flex;
-  gap: 1rem;
-  margin: 0 auto;
-
-  & > :hover {
-    color: #5E96FC;
-    cursor: pointer;
-  }
+.Location img {
+  margin-top: 3px;
+  width: 100%;
 }

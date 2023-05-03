@@ -1,11 +1,13 @@
+import { Paper, Text, Title } from '@mantine/core';
 import { FC } from 'react';
+import Dot from './Dot.svg';
+import Location from './Location.svg';
+import Star from './Star.svg';
+import styles from './Vacancy.module.scss';
 
 export type VacancyProps = {
-  id: string;
   profession: string;
-  firm_name: string;
   town: string;
-  industry: string;
   typeOfWork: string;
   payment_amount_from: number;
   payment_amount_to: number;
@@ -13,34 +15,38 @@ export type VacancyProps = {
 };
 
 export const Vacancy: FC<VacancyProps> = ({
-  id,
   profession,
-  firm_name,
   town,
-  industry,
   typeOfWork,
   payment_amount_from,
   payment_amount_to,
   currency,
 }) => {
   return (
-    <li key={id}>
-      <h3>{profession}</h3>
-      <p>{firm_name}</p>
-      <p>{town}</p>
-      <p>{industry}</p>
-      <p>{typeOfWork}</p>
-      <p>
-        {payment_amount_from} - {payment_amount_to} {currency}
-      </p>
-    </li>
-
-    // <Paper shadow="xs" p="md">
-    //   <Text>Paper is the most basic ui component</Text>
-    //   <Text>
-    //     Use it to create cards, dropdowns, modals and other components that
-    //     require background with shadow
-    //   </Text>
-    // </Paper>
+    <Paper shadow="xs" radius="lg" p="lg" m="lg">
+      <div className={styles.FirstRowContainer}>
+        <Title order={3} color="#5E96FC" className={styles.Title}>
+          {profession}
+        </Title>
+        <div className={styles.Star}>
+          <img src={Star} alt="Star" />
+        </div>
+      </div>
+      <div className={styles.SecondRowContainer}>
+        <Text fw={700}>
+          з/п {payment_amount_from} - {payment_amount_to} {currency}
+        </Text>
+        <div>
+          <img src={Dot} alt="Dot" />
+        </div>
+        <Text>{typeOfWork}</Text>
+      </div>
+      <div className={styles.ThirdRowContainer}>
+        <div className={styles.Location}>
+          <img src={Location} alt="Location" />
+        </div>
+        <Text>{town}</Text>
+      </div>
+    </Paper>
   );
 };
