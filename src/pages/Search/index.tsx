@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Search.module.scss';
 
 export function Search() {
@@ -26,17 +27,17 @@ export function Search() {
     <div className={styles.Container}>
       <ul>
         {vacancies.map((vacancy) => (
-          <li key={vacancy?.id}>
-            <h3>{vacancy?.profession}</h3>
-            <p>{vacancy?.firm_name}</p>
-            <p>{vacancy?.town?.title}</p>
-            <p>{vacancy?.catalogues[0]?.title}</p>
-            <p>{vacancy?.type_of_work?.title}</p>
-            <p>
-              {vacancy?.payment_from} - {vacancy?.payment_to}{' '}
-              {vacancy?.currency}
-            </p>
-          </li>
+          <Vacancy
+            currency={vacancy?.currency}
+            firm_name={vacancy?.firm_name}
+            industry={vacancy?.catalogues[0]?.title}
+            payment_amount_from={vacancy?.payment_from}
+            payment_amount_to={vacancy?.payment_to}
+            profession={vacancy?.profession}
+            town={vacancy?.town?.title}
+            typeOfWork={vacancy?.type_of_work?.title}
+            id={vacancy?.id}
+          />
         ))}
       </ul>
     </div>
