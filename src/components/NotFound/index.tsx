@@ -9,8 +9,8 @@ export function NotFound() {
       <div>
         <img src={NotFoundSvg} alt="Not Found" />
         <h2>Упс, здесь еще ничего нет!</h2>
-        <Button component={Link} to="/search">
-          Поиск Вакансий
+        <Button component={Link} to="/search" className={styles.Button}>
+          <p>Поиск Вакансий</p>
         </Button>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { Header, Text } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
-import logo from './logo.svg';
+import Logo from './Logo.svg';
 
 export const CustomHeader = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ export const CustomHeader = () => {
   return (
     <Header height={84} className={styles.CustomHeader}>
       <div className={styles.Logo}>
-        <img src={logo} alt="Logo" />
+        <img src={Logo} alt="Logo" />
       </div>
       <div className={styles.Menu}>
         <Text onClick={handleSearchClick}>Поиск вакансий</Text>

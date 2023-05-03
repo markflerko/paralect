@@ -1,7 +1,8 @@
 import { AppShell } from '@mantine/core';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { CustomHeader } from './components/Header';
-import { NotFound } from './components/NotFound/indext';
+import { Search } from './components/Search';
+import { NotFound } from './components/NotFound';
 
 export default function App() {
   return (
@@ -24,14 +25,6 @@ function Layout() {
       <AppShell padding="md" header={CustomHeader()}>
         <Outlet />
       </AppShell>
-    </div>
-  );
-}
-
-function Search() {
-  return (
-    <div>
-      <h2>Search</h2>
     </div>
   );
 }
