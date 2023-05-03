@@ -1,8 +1,8 @@
 import { AppShell } from '@mantine/core';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { CustomHeader } from './components/Header';
-import { Search } from './components/Search';
-import { NotFound } from './components/NotFound';
+import { NotFound } from './pages/NotFound';
+import { Search } from './pages/Search';
 
 export default function App() {
   return (
