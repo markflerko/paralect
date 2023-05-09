@@ -37,12 +37,13 @@ export function Search() {
         {vacancies.map((vacancy) => (
           <Vacancy
             currency={vacancy?.currency}
-            payment_amount_from={vacancy?.payment_from}
-            payment_amount_to={vacancy?.payment_to}
+            paymentAmountFrom={vacancy?.payment_from}
+            paymentAmountTo={vacancy?.payment_to}
             profession={vacancy?.profession}
             town={vacancy?.town?.title}
             typeOfWork={vacancy?.type_of_work?.title}
             key={vacancy?.id}
+            id={vacancy?.id}
           />
         ))}
         <Pagination value={activePage} onChange={setPage} total={3} />
