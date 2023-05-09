@@ -23,7 +23,7 @@ export const Vacancy: FC<VacancyProps> = ({
   currency,
 }) => {
   return (
-    <Paper shadow="xs" radius="lg" p="lg" m="sm">
+    <Paper shadow="xs" radius="lg" p="lg" m="sm" className={styles.VacancyContainer}>
       <div className={styles.FirstRowContainer}>
         <Title order={3} color="#5E96FC" className={styles.Title}>
           {profession}

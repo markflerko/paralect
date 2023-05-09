@@ -1,3 +1,4 @@
+import { Pagination } from '@mantine/core';
 import axios from 'axios';
 import FilterTab from 'components/FilterTab/FilterTab';
 import { useEffect, useState } from 'react';
@@ -7,6 +8,7 @@ import styles from './Search.module.scss';
 
 export function Search() {
   const [vacancies, setVacancies] = useState<Record<string, any>[]>([]);
+  const [activePage, setPage] = useState(1);
 
   useEffect(() => {
     axios
@@ -18,7 +20,7 @@ export function Search() {
         },
       })
       .then((res) => {
-        setVacancies(res.data.objects);
+        setVacancies(res.data.objects.splice(0, 4));
       })
       .catch((error) => {
         console.error(error);
@@ -27,10 +29,10 @@ export function Search() {
 
   return (
     <div className={styles.Container}>
-      <div className={styles.FilterTabContainer}>
+      <div className={styles.FirstColumnContainer}>
         <FilterTab />
       </div>
-      <div className={styles.SearchBarAndVacanciesContainer}>
+      <div className={styles.FirstColumnContainer}>
         <SearchBar />
         {vacancies.map((vacancy) => (
           <Vacancy
@@ -43,6 +45,7 @@ export function Search() {
             key={vacancy?.id}
           />
         ))}
+        <Pagination value={activePage} onChange={setPage} total={3} />
       </div>
     </div>
   );

@@ -1,5 +1,9 @@
 @import 'src/assets/styles/mixins';
 
+.VacancyContainer {
+  width: 100%;
+}
+
 .FirstRowContainer {
   display: flex;
   justify-content: space-between;

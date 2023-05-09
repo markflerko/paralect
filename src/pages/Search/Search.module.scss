@@ -11,14 +11,10 @@
   margin-bottom: 20px;
 }
 
-.SearchBarAndVacanciesContainer {
+.FirstColumnContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-
-  > div {
-    width: 100%;
-  }
 }
