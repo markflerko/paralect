@@ -8,6 +8,7 @@ import styles from './Search.module.scss';
 
 export function Search() {
   const [vacancies, setVacancies] = useState<Record<string, any>[]>([]);
+  const [saved, setSaved] = useState([]);
   const [activePage, setPage] = useState(1);
 
   useEffect(() => {
@@ -25,6 +26,9 @@ export function Search() {
       .catch((error) => {
         console.error(error);
       });
+
+    const saved = JSON.parse(localStorage.getItem('saved') || '[]');
+    setSaved(saved);
   }, []);
 
   return (
@@ -44,6 +48,7 @@ export function Search() {
             typeOfWork={vacancy?.type_of_work?.title}
             key={vacancy?.id}
             id={vacancy?.id}
+            isSaved={saved.some((item) => item === vacancy?.id)}
           />
         ))}
         <Pagination value={activePage} onChange={setPage} total={3} />

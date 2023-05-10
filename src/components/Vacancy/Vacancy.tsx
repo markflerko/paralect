@@ -2,7 +2,8 @@ import { Paper, Text, Title } from '@mantine/core';
 import Dot from 'assets/images/Dot.svg';
 import Location from 'assets/images/Location.svg';
 import Star from 'assets/images/Star.svg';
-import { FC } from 'react';
+import StarActive from 'assets/images/StarActive.svg';
+import { FC, useState } from 'react';
 import styles from './Vacancy.module.scss';
 
 export type VacancyProps = {
@@ -13,6 +14,7 @@ export type VacancyProps = {
   paymentAmountTo: number;
   currency: string;
   id: number;
+  isSaved: boolean;
 };
 
 export const Vacancy: FC<VacancyProps> = ({
@@ -23,7 +25,10 @@ export const Vacancy: FC<VacancyProps> = ({
   paymentAmountTo,
   currency,
   id,
+  isSaved,
 }) => {
+  const [isStarActive, setIsStarActive] = useState(isSaved ?? false);
+
   const handleStarClick = () => {
     let saved = JSON.parse(localStorage.getItem('saved') || '[]') as number[];
     const index = saved.indexOf(id);
@@ -36,6 +41,8 @@ export const Vacancy: FC<VacancyProps> = ({
     }
 
     localStorage.setItem('saved', JSON.stringify(saved));
+
+    setIsStarActive(!isStarActive);
   };
 
   return (
@@ -51,7 +58,11 @@ export const Vacancy: FC<VacancyProps> = ({
           {profession}
         </Title>
         <div className={styles.Star} onClick={handleStarClick}>
-          <img src={Star} alt="Star" />
+          {isStarActive ? (
+            <img src={StarActive} alt="StarActive" />
+          ) : (
+            <img src={Star} alt="Star" />
+          )}
         </div>
       </div>
       <div className={styles.SecondRowContainer}>
