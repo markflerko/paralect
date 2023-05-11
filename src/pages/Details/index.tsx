@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Details.module.scss';
-import { useParams } from 'react-router-dom';
 
 export function Details() {
   const [vacancy, setVacancy] = useState<Record<string, any>>();
@@ -50,6 +50,7 @@ export function Details() {
         key={vacancy?.id}
         id={vacancy?.id}
         isSaved={saved.some((item) => item === vacancy?.id)}
+        displayType="details"
       />
     </div>
   );

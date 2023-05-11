@@ -15,6 +15,7 @@ export type VacancyProps = {
   currency: string;
   id: number;
   isSaved: boolean;
+  displayType?: 'details' | 'list'
 };
 
 export const Vacancy: FC<VacancyProps> = ({
@@ -26,8 +27,13 @@ export const Vacancy: FC<VacancyProps> = ({
   currency,
   id,
   isSaved,
+  displayType = 'list'
 }) => {
   const [isStarActive, setIsStarActive] = useState(isSaved ?? false);
+
+  const titleColor = displayType === 'list' ? "#5E96FC" : '#232134';
+  const titleOrder = displayType === 'list' ? 3 : 1;
+  const fz = displayType === 'list' ? 'md' : 'xl';
 
   const handleStarClick = () => {
     let saved = JSON.parse(localStorage.getItem('saved') || '[]') as number[];
@@ -54,7 +60,7 @@ export const Vacancy: FC<VacancyProps> = ({
       className={styles.VacancyContainer}
     >
       <div className={styles.FirstRowContainer}>
-        <Title order={3} color="#5E96FC" className={styles.Title}>
+        <Title order={titleOrder} color={titleColor} className={styles.Title}>
           {profession}
         </Title>
         <div className={styles.Star} onClick={handleStarClick}>
@@ -66,19 +72,19 @@ export const Vacancy: FC<VacancyProps> = ({
         </div>
       </div>
       <div className={styles.SecondRowContainer}>
-        <Text fw={700}>
+        <Text fw={700} fz={fz}>
           з/п {paymentAmountFrom} - {paymentAmountTo} {currency}
         </Text>
         <div>
           <img src={Dot} alt="Dot" />
         </div>
-        <Text>{typeOfWork}</Text>
+        <Text fz={fz}>{typeOfWork}</Text>
       </div>
       <div className={styles.ThirdRowContainer}>
         <div className={styles.Location}>
           <img src={Location} alt="Location" />
         </div>
-        <Text>{town}</Text>
+        <Text fz={fz}>{town}</Text>
       </div>
     </Paper>
   );
