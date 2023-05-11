@@ -1,3 +1,8 @@
 .Container {
-
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 2rem 0rem;
+  width: 60%;
+  gap: 2rem
 }

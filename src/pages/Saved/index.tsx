@@ -6,7 +6,7 @@ import styles from './Saved.module.scss';
 
 export function Saved() {
   const [vacancies, setVacancies] = useState<Record<string, any>[]>([]);
-  const [saved, setSaved] = useState([]);
+  const [saved, setSaved] = useState<number[]>([]);
   const [activePage, setPage] = useState(1);
 
   useEffect(() => {
@@ -14,6 +14,7 @@ export function Saved() {
       const saved = JSON.parse(
         localStorage.getItem('saved') || '[]'
       ) as number[];
+      setSaved(saved);
 
       let receivedVacancies = [];
 
@@ -48,22 +49,20 @@ export function Saved() {
 
   return (
     <div className={styles.Container}>
-      <div className={styles.FirstColumnContainer}>
-        {vacancies.map((vacancy) => (
-          <Vacancy
-            currency={vacancy?.currency}
-            paymentAmountFrom={vacancy?.payment_from}
-            paymentAmountTo={vacancy?.payment_to}
-            profession={vacancy?.profession}
-            town={vacancy?.town?.title}
-            typeOfWork={vacancy?.type_of_work?.title}
-            key={vacancy?.id}
-            id={vacancy?.id}
-            isSaved={saved.some((item) => item === vacancy?.id)}
-          />
-        ))}
-        <Pagination value={activePage} onChange={setPage} total={3} />
-      </div>
+      {vacancies.map((vacancy) => (
+        <Vacancy
+          currency={vacancy?.currency}
+          paymentAmountFrom={vacancy?.payment_from}
+          paymentAmountTo={vacancy?.payment_to}
+          profession={vacancy?.profession}
+          town={vacancy?.town?.title}
+          typeOfWork={vacancy?.type_of_work?.title}
+          key={vacancy?.id}
+          id={vacancy?.id}
+          isSaved={saved.some((item) => item === vacancy?.id)}
+        />
+      ))}
+      <Pagination value={activePage} onChange={setPage} total={3} />
     </div>
   );
 }
