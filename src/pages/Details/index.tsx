@@ -1,3 +1,4 @@
+import { Paper } from '@mantine/core';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -51,6 +52,13 @@ export function Details() {
         id={vacancy?.id}
         isSaved={saved.some((item) => item === vacancy?.id)}
         displayType="details"
+      />
+      <Paper
+        shadow="xs"
+        radius="lg"
+        p="xl"
+        className={styles.DescriptionContainer}
+        dangerouslySetInnerHTML={{ __html: vacancy?.vacancyRichText || '' }}
       />
     </div>
   );
