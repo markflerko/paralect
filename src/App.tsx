@@ -4,6 +4,7 @@ import { CustomHeader } from './components/Header';
 import { NotFound } from './pages/NotFound';
 import { Search } from './pages/Search';
 import { Saved } from 'pages/Saved';
+import { Details } from 'pages/Details';
 
 export default function App() {
   return (
@@ -11,7 +12,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="search" element={<Search />} />
-          <Route path="vacancy" element={<Vacancy />} />
+          <Route path="details/:id" element={<Details />} />
           <Route path="saved" element={<Saved />} />
           <Route path="*" element={<NotFound />} />
         </Route>
@@ -26,14 +27,6 @@ function Layout() {
       <AppShell padding="md" header={CustomHeader()}>
         <Outlet />
       </AppShell>
-    </div>
-  );
-}
-
-function Vacancy() {
-  return (
-    <div>
-      <h2>Vacancy</h2>
     </div>
   );
 }
