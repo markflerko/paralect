@@ -11,7 +11,7 @@ export const CustomHeader = () => {
   };
 
   const handleFavoritesClick = () => {
-    navigate('/vacancy');
+    navigate('/saved');
   };
 
   return (

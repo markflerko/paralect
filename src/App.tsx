@@ -3,6 +3,7 @@ import { Outlet, Route, Routes } from 'react-router-dom';
 import { CustomHeader } from './components/Header';
 import { NotFound } from './pages/NotFound';
 import { Search } from './pages/Search';
+import { Saved } from 'pages/Saved';
 
 export default function App() {
   return (
@@ -11,7 +12,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route path="search" element={<Search />} />
           <Route path="vacancy" element={<Vacancy />} />
-          <Route path="favorites" element={<Favorites />} />
+          <Route path="saved" element={<Saved />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
@@ -33,14 +34,6 @@ function Vacancy() {
   return (
     <div>
       <h2>Vacancy</h2>
-    </div>
-  );
-}
-
-function Favorites() {
-  return (
-    <div>
-      <h2>Favorites</h2>
     </div>
   );
 }
