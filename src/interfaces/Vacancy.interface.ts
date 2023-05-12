@@ -5,5 +5,6 @@ export interface IVacancy {
   paymentAmountFrom: number;
   paymentAmountTo: number;
   currency: string;
-  id: string;
+  id: number;
+  vacancyRichText: string;
 }

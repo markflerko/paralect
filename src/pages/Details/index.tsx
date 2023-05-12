@@ -1,14 +1,20 @@
 import { Paper } from '@mantine/core';
-import axios from 'axios';
+import { useAppSelector } from 'hooks/reduxHooks';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { AppDispatch } from 'redux/store';
+import getVacancyByIdThunk from 'redux/thunks/getVacancyThunk';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Details.module.scss';
 
 export function Details() {
-  const [vacancy, setVacancy] = useState<Record<string, any>>();
+  const dispatch = useDispatch<AppDispatch>();
+
   const [saved, setSaved] = useState<number[]>([]);
   const { id } = useParams<{ id: string }>();
+
+  const { data: vacancy } = useAppSelector(({ vacancy }) => vacancy);
 
   useEffect(() => {
     async function getVacancies() {
@@ -17,37 +23,21 @@ export function Details() {
       ) as number[];
       setSaved(saved);
 
-      axios
-        .get(
-          `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/${id}`,
-          {
-            headers: {
-              'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-              'X-Api-App-Id':
-                'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
-            },
-          }
-        )
-        .then((res) => {
-          return setVacancy(res.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      dispatch(getVacancyByIdThunk(id ?? ''));
     }
 
     getVacancies();
-  }, []);
+  }, [id, dispatch]);
 
   return (
     <div className={styles.Container}>
       <Vacancy
         currency={vacancy?.currency}
-        paymentAmountFrom={vacancy?.payment_from}
-        paymentAmountTo={vacancy?.payment_to}
+        paymentAmountFrom={vacancy?.paymentAmountFrom}
+        paymentAmountTo={vacancy?.paymentAmountTo}
         profession={vacancy?.profession}
-        town={vacancy?.town?.title}
-        typeOfWork={vacancy?.type_of_work?.title}
+        town={vacancy?.town}
+        typeOfWork={vacancy?.typeOfWork}
         key={vacancy?.id}
         id={vacancy?.id}
         isSaved={saved.some((item) => item === vacancy?.id)}
