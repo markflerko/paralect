@@ -14,7 +14,7 @@ export function Details() {
   const [saved, setSaved] = useState<number[]>([]);
   const { id } = useParams<{ id: string }>();
 
-  const { data: vacancy } = useAppSelector(({ vacancy }) => vacancy);
+  const { data: vacancy, isLoaded } = useAppSelector(({ vacancy }) => vacancy);
 
   useEffect(() => {
     async function getVacancies() {
@@ -28,6 +28,10 @@ export function Details() {
 
     getVacancies();
   }, [id, dispatch]);
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.Container}>
