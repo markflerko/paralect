@@ -1,62 +1,40 @@
 import { Pagination } from '@mantine/core';
-import axios from 'axios';
+import { useAppSelector } from 'hooks/reduxHooks';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from 'redux/store';
+import getSavedVacanciesThunk from 'redux/thunks/getSavedVacanciesThunk';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Saved.module.scss';
 
 export function Saved() {
-  const [vacancies, setVacancies] = useState<Record<string, any>[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
   const [saved, setSaved] = useState<number[]>([]);
   const [activePage, setPage] = useState(1);
 
+  const { data: vacancies, isLoaded } = useAppSelector(({ saved }) => saved);
+
   useEffect(() => {
-    async function getVacancies() {
-      const saved = JSON.parse(
-        localStorage.getItem('saved') || '[]'
-      ) as number[];
-      setSaved(saved);
+    const saved = JSON.parse(localStorage.getItem('saved') || '[]') as number[];
+    setSaved(saved);
 
-      let receivedVacancies = [];
+    dispatch(getSavedVacanciesThunk(saved));
+  }, [dispatch]);
 
-      const getVacancy = (id: number) =>
-        axios
-          .get(
-            `https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/${id}`,
-            {
-              headers: {
-                'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-                'X-Api-App-Id':
-                  'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
-              },
-            }
-          )
-          .then((res) => {
-            return res.data;
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-
-      const promises = saved.map((id) => getVacancy(id));
-
-      receivedVacancies = await Promise.all(promises);
-
-      setVacancies(receivedVacancies);
-    }
-
-    getVacancies();
-  }, []);
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.Container}>
       {vacancies.map((vacancy) => (
         <Vacancy
           currency={vacancy?.currency}
-          paymentAmountFrom={vacancy?.payment_from}
-          paymentAmountTo={vacancy?.payment_to}
+          paymentAmountFrom={vacancy?.paymentAmountFrom}
+          paymentAmountTo={vacancy?.paymentAmountTo}
           profession={vacancy?.profession}
-          town={vacancy?.town?.title}
-          typeOfWork={vacancy?.type_of_work?.title}
+          town={vacancy?.town}
+          typeOfWork={vacancy?.typeOfWork}
           key={vacancy?.id}
           id={vacancy?.id}
           isSaved={saved.some((item) => item === vacancy?.id)}

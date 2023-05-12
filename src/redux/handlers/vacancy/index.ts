@@ -3,6 +3,7 @@ import { IVacancy } from 'interfaces/Vacancy.interface';
 import getVacancyByIdThunk, {
   getVacancyByIdThunkResponseType,
 } from 'redux/thunks/getVacancyThunk';
+import { vacancyFieldMapper } from 'utils/vacancyFieldMapper';
 
 export interface VacancyState {
   data: IVacancy;
@@ -46,16 +47,7 @@ const vacancy = createSlice({
         state: VacancyState,
         { payload }: PayloadAction<getVacancyByIdThunkResponseType>
       ) => {
-        state.data = {
-          currency: payload?.currency,
-          id: payload?.id,
-          paymentAmountFrom: payload?.payment_from,
-          paymentAmountTo: payload?.payment_to,
-          profession: payload?.profession,
-          town: payload?.town?.title,
-          typeOfWork: payload?.type_of_work?.title,
-          vacancyRichText: payload?.vacancyRichText,
-        };
+        state.data = vacancyFieldMapper(payload);
         state.isLoaded = true;
 
         return state;
