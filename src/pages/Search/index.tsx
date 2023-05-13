@@ -1,35 +1,34 @@
 import { Pagination } from '@mantine/core';
-import axios from 'axios';
 import FilterTab from 'components/FilterTab/FilterTab';
+import { useAppSelector } from 'hooks/reduxHooks';
 import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from 'redux/store';
+import getVacanciesThunk from 'redux/thunks/getVacanciesThunk';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Search.module.scss';
 
 export function Search() {
-  const [vacancies, setVacancies] = useState<Record<string, any>[]>([]);
+  const dispatch = useDispatch<AppDispatch>();
+
   const [saved, setSaved] = useState([]);
   const [activePage, setPage] = useState(1);
 
+  const { data: vacancies, isLoaded } = useAppSelector(
+    ({ vacancies }) => vacancies
+  );
+
   useEffect(() => {
-    axios
-      .get('https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/', {
-        headers: {
-          'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-          'X-Api-App-Id':
-            'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
-        },
-      })
-      .then((res) => {
-        setVacancies(res.data.objects.splice(0, 4));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    dispatch(getVacanciesThunk());
 
     const saved = JSON.parse(localStorage.getItem('saved') || '[]');
     setSaved(saved);
   }, []);
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.Container}>
@@ -41,11 +40,11 @@ export function Search() {
         {vacancies.map((vacancy) => (
           <Vacancy
             currency={vacancy?.currency}
-            paymentAmountFrom={vacancy?.payment_from}
-            paymentAmountTo={vacancy?.payment_to}
+            paymentAmountFrom={vacancy?.paymentAmountFrom}
+            paymentAmountTo={vacancy?.paymentAmountTo}
             profession={vacancy?.profession}
-            town={vacancy?.town?.title}
-            typeOfWork={vacancy?.type_of_work?.title}
+            town={vacancy?.town}
+            typeOfWork={vacancy?.typeOfWork}
             key={vacancy?.id}
             id={vacancy?.id}
             isSaved={saved.some((item) => item === vacancy?.id)}
