@@ -20,11 +20,11 @@ export function Search() {
   );
 
   useEffect(() => {
-    dispatch(getVacanciesThunk());
+    dispatch(getVacanciesThunk({ page: activePage - 1 }));
 
     const saved = JSON.parse(localStorage.getItem('saved') || '[]');
     setSaved(saved);
-  }, [dispatch]);
+  }, [dispatch, activePage]);
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -50,7 +50,12 @@ export function Search() {
             isSaved={saved.some((item) => item === vacancy?.id)}
           />
         ))}
-        <Pagination value={activePage} onChange={setPage} total={3} />
+        <Pagination
+          value={activePage}
+          onChange={setPage}
+          total={120}
+          className={styles.PaginationContainer}
+        />
       </div>
     </div>
   );

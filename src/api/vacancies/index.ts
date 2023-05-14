@@ -13,10 +13,10 @@ export default class VacancyAPI extends API implements IVacanciesAPI {
     super(headers);
   }
 
-  public async getVacancies() {
+  public async getVacancies({ page = 0 }: { page?: number }) {
     return this.instance
-      .get('vacancies')
-      .then((res) => res.data.objects.splice(0, 4))
+      .get(`vacancies?count=4&page=${page}`)
+      .then((res) => res.data.objects)
       .catch(() => []);
   }
 

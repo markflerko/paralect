@@ -3,10 +3,10 @@ import { IVacanciesAPI } from 'api/vacancies/types';
 import { getVacancyByIdThunkResponseType } from 'redux/thunks/getVacancyThunk';
 
 export const getVacanciesThunkCb = (api: IVacanciesAPI) =>
-  createAsyncThunk<getVacancyByIdThunkResponseType[]>(
+  createAsyncThunk<getVacancyByIdThunkResponseType[], { page: number }>(
     'vacanciesSlice/vacancies',
-    async (_, thunkApi) => {
-      return await api.getVacancies();
+    async ({ page = 0 }, thunkApi) => {
+      return await api.getVacancies({ page });
     }
   );
 
