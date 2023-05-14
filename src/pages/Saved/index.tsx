@@ -3,7 +3,7 @@ import { useAppSelector } from 'hooks/reduxHooks';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'redux/store';
-import getSavedVacanciesThunk from 'redux/thunks/getSavedVacanciesThunk';
+import { getSavedVacanciesThunk } from 'redux/thunks';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Saved.module.scss';
 
@@ -40,7 +40,7 @@ export function Saved() {
           isSaved={saved.some((item) => item === vacancy?.id)}
         />
       ))}
-      <Pagination value={activePage} onChange={setPage} total={3} />
+      <Pagination value={activePage} onChange={setPage} total={3}  className={styles.PaginationContainer}/>
     </div>
   );
 }

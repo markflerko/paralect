@@ -4,7 +4,7 @@ import { useAppSelector } from 'hooks/reduxHooks';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'redux/store';
-import getVacanciesThunk from 'redux/thunks/getVacanciesThunk';
+import { getVacanciesThunk } from 'redux/thunks';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Search.module.scss';
@@ -24,7 +24,7 @@ export function Search() {
 
     const saved = JSON.parse(localStorage.getItem('saved') || '[]');
     setSaved(saved);
-  }, []);
+  }, [dispatch]);
 
   if (!isLoaded) {
     return <div>Loading...</div>;

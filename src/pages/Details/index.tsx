@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { AppDispatch } from 'redux/store';
-import getVacancyByIdThunk from 'redux/thunks/getVacancyThunk';
+import { getVacancyByIdThunk } from 'redux/thunks';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Details.module.scss';
 

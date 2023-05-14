@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IVacancy } from 'interfaces/Vacancy.interface';
-import getSavedVacanciesThunk from 'redux/thunks/getSavedVacanciesThunk';
+import { getSavedVacanciesThunk } from 'redux/thunks';
 import { getVacancyByIdThunkResponseType } from 'redux/thunks/getVacancyThunk';
 import { vacancyFieldMapper } from 'utils/vacancyFieldMapper';
 

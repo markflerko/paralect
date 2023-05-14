@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IVacancy } from 'interfaces/Vacancy.interface';
-import getVacancyByIdThunk, {
-  getVacancyByIdThunkResponseType,
-} from 'redux/thunks/getVacancyThunk';
+import { getVacancyByIdThunk } from 'redux/thunks';
+import { getVacancyByIdThunkResponseType } from 'redux/thunks/getVacancyThunk';
 import { vacancyFieldMapper } from 'utils/vacancyFieldMapper';
 
 export interface VacancyState {
