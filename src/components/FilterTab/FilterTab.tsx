@@ -1,36 +1,33 @@
 import { Button, NumberInput, Paper, Text, Title } from '@mantine/core';
 import Cancel from 'assets/images/Cancel.svg';
-import axios from 'axios';
 import { Dropdown } from 'components/Dropdown/Dropdown';
-import { FC, useEffect, useState } from 'react';
+import { useAppSelector } from 'hooks/reduxHooks';
+import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from 'redux/store';
+import { getCataloguesThunk } from 'redux/thunks';
 import styles from './FilterTab.module.scss';
 
 export type FilterTabProps = {};
 
-export const FilterTab: FC<FilterTabProps> = ({}) => {
-  const [industries, setIndustries] = useState<string[]>([]);
+export const FilterTab: FC<FilterTabProps> = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const { data: industries, isLoaded } = useAppSelector(
+    ({ catalogues }) => catalogues
+  );
 
   useEffect(() => {
-    axios
-      .get('https://startup-summer-2023-proxy.onrender.com/2.0/catalogues/', {
-        headers: {
-          'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-          'X-Api-App-Id':
-            'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
-        },
-      })
-      .then((res) => {
-        const result = res.data.map((item: { title: string }) => item?.title);
-        setIndustries(result);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+    dispatch(getCataloguesThunk());
+  }, [dispatch]);
 
   const handleApply = () => {
     console.log('handleSearch');
   };
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Paper className={styles.Container} radius={'lg'} p={'lg'}>
