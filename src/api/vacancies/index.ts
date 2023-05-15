@@ -25,12 +25,15 @@ export default class VacancyAPI extends API implements IVacanciesAPI {
     if (key) {
       queryString += `&catalogues=${key}`;
     }
+
     if (paymentFrom) {
       queryString += `&payment_from=${paymentFrom}`;
     }
+
     if (paymentTo) {
       queryString += `&payment_to=${paymentTo}`;
     }
+
     if (keyword) {
       queryString += `&keyword=${keyword}`;
     }

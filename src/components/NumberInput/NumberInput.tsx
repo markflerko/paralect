@@ -1,17 +1,14 @@
 import { NumberInput } from '@mantine/core';
-import { FC } from 'react';
 
 export type NumberInputProps = {
   setValue: (value: number) => void;
   placeholder: string;
 };
 
-export const MonetaryInput: FC<NumberInputProps> = (props) => {
-  const { setValue } = props;
-
+export const MonetaryInput = ({ setValue, placeholder }: NumberInputProps) => {
   const handleChange = (value: number) => {
     setValue(value);
   };
 
-  return <NumberInput onChange={handleChange} />;
+  return <NumberInput onChange={handleChange} placeholder={placeholder} />;
 };

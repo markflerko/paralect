@@ -1,48 +1,40 @@
 import { Vacancy } from 'components/Vacancy/Vacancy';
-import { useAppSelector } from 'hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'redux/store';
 import { getVacanciesThunk } from 'redux/thunks';
+import { isSavedVacancy } from 'utils/isSavedVacancy';
+import { LoaderLayout } from 'layouts';
 
 export type VacanciesContainerProps = {
-  activePage: number;
-  saved: number[];
+  page: number;
 };
 
-export const VacanciesContainer: React.FC<VacanciesContainerProps> = ({
-  activePage,
-  saved,
-}) => {
-  const dispatch = useDispatch<AppDispatch>();
+export const VacanciesContainer = ({ page }: VacanciesContainerProps) => {
+  const dispatch = useAppDispatch();
 
   const { data: vacancies, isLoaded } = useAppSelector(
     ({ vacancies }) => vacancies,
   );
 
   useEffect(() => {
-    dispatch(getVacanciesThunk({ page: activePage - 1 }));
-  }, [dispatch, activePage]);
-
-  if (!isLoaded) {
-    return <div>Loading...</div>;
-  }
+    dispatch(getVacanciesThunk({ page }));
+  }, [dispatch, page]);
 
   return (
-    <>
+    <LoaderLayout loaded={isLoaded}>
       {vacancies.map((vacancy) => (
         <Vacancy
-          currency={vacancy?.currency}
-          paymentAmountFrom={vacancy?.paymentAmountFrom}
-          paymentAmountTo={vacancy?.paymentAmountTo}
-          profession={vacancy?.profession}
-          town={vacancy?.town}
-          typeOfWork={vacancy?.typeOfWork}
-          key={vacancy?.id}
-          id={vacancy?.id}
-          isSaved={saved.some((item) => item === vacancy?.id)}
+          currency={vacancy.currency}
+          paymentAmountFrom={vacancy.paymentAmountFrom}
+          paymentAmountTo={vacancy.paymentAmountTo}
+          profession={vacancy.profession}
+          town={vacancy.town}
+          typeOfWork={vacancy.typeOfWork}
+          key={vacancy.id}
+          id={vacancy.id}
+          isSaved={isSavedVacancy(vacancy.id)}
         />
       ))}
-    </>
+    </LoaderLayout>
   );
 };

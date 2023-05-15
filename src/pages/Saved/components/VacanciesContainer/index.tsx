@@ -1,51 +1,44 @@
+import { useEffect } from 'react';
 import { Vacancy } from 'components/Vacancy/Vacancy';
 import { vacanciesOnPage } from 'configuration';
-import { useAppSelector } from 'hooks/reduxHooks';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'redux/store';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { getSavedVacanciesThunk } from 'redux/thunks';
+import { getSavedVacancyIds } from 'utils/getSavedVacancyIds';
+import { LoaderLayout } from 'layouts';
 
 export type VacanciesContainerProps = {
-  activePageAsIndex: number;
-  saved: number[];
+  page: number;
 };
 
-export const VacanciesContainer: React.FC<VacanciesContainerProps> = ({
-  activePageAsIndex,
-  saved,
-}) => {
-  const dispatch = useDispatch<AppDispatch>();
+export const VacanciesContainer = ({ page }: VacanciesContainerProps) => {
+  const savedVacancyIds = getSavedVacancyIds();
+  const dispatch = useAppDispatch();
 
   const { data: vacancies, isLoaded } = useAppSelector(({ saved }) => saved);
 
   useEffect(() => {
-    const start = activePageAsIndex * vacanciesOnPage;
+    const start = page * vacanciesOnPage;
     const end = start + vacanciesOnPage;
-    const activePageVacanciesIds = saved.slice(start, end);
+    const activePageVacanciesIds = savedVacancyIds.slice(start, end);
 
     dispatch(getSavedVacanciesThunk(activePageVacanciesIds));
-  }, [activePageAsIndex, dispatch, saved]);
-
-  if (!isLoaded) {
-    return <div>Loading...</div>;
-  }
+  }, [page, dispatch, savedVacancyIds]);
 
   return (
-    <>
+    <LoaderLayout loaded={isLoaded}>
       {vacancies.map((vacancy) => (
         <Vacancy
-          currency={vacancy?.currency}
-          paymentAmountFrom={vacancy?.paymentAmountFrom}
-          paymentAmountTo={vacancy?.paymentAmountTo}
-          profession={vacancy?.profession}
-          town={vacancy?.town}
-          typeOfWork={vacancy?.typeOfWork}
-          key={vacancy?.id}
-          id={vacancy?.id}
-          isSaved={saved.some((item) => item === vacancy?.id)}
+          currency={vacancy.currency}
+          paymentAmountFrom={vacancy.paymentAmountFrom}
+          paymentAmountTo={vacancy.paymentAmountTo}
+          profession={vacancy.profession}
+          town={vacancy.town}
+          typeOfWork={vacancy.typeOfWork}
+          key={vacancy.id}
+          id={vacancy.id}
+          isSaved={savedVacancyIds.some((item) => item === vacancy.id)}
         />
       ))}
-    </>
+    </LoaderLayout>
   );
 };

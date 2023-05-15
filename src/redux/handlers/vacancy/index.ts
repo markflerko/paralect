@@ -25,7 +25,7 @@ export const initialState: VacancyState = {
 
 const vacancy = createSlice({
   name: 'vacancy',
-  initialState: initialState as VacancyState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getVacancyByIdThunk.pending, (state: VacancyState) => {

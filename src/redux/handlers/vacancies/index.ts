@@ -16,7 +16,7 @@ export const initialState: VacanciesState = {
 
 const vacancies = createSlice({
   name: 'vacancies',
-  initialState: initialState as VacanciesState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getVacanciesThunk.pending, (state: VacanciesState) => {

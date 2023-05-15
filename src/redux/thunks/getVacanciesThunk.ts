@@ -5,7 +5,7 @@ import { getVacancyByIdThunkResponseType } from 'redux/thunks/getVacancyThunk';
 export const getVacanciesThunkCb = (api: IVacanciesAPI) =>
   createAsyncThunk<getVacancyByIdThunkResponseType[], IVacanciesDto>(
     'vacanciesSlice/vacancies',
-    async (dto, thunkApi) => {
+    async (dto) => {
       return await api.getVacancies(dto);
     },
   );

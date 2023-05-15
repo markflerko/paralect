@@ -16,7 +16,7 @@ export const initialState: SavedState = {
 
 const saved = createSlice({
   name: 'saved',
-  initialState: initialState as SavedState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getSavedVacanciesThunk.pending, (state: SavedState) => {

@@ -1,23 +1,19 @@
 import { Button, Input } from '@mantine/core';
-import { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'redux/store';
+import { useState, ChangeEvent } from 'react';
 import { getVacanciesThunk } from 'redux/thunks';
+import { useAppDispatch } from 'hooks/reduxHooks';
 import styles from './SearchBar.module.scss';
 import { SearchIcon } from './SearchIcon';
 
-export type SearchBarProps = {};
-
-export const SearchBar: FC<SearchBarProps> = ({}) => {
-  const dispatch = useDispatch<AppDispatch>();
-
+export const SearchBar = () => {
+  const dispatch = useAppDispatch();
   const [query, setQuery] = useState<string>('');
 
   const handleSearch = () => {
     dispatch(getVacanciesThunk({ keyword: query }));
   };
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.currentTarget.value);
   };
 
@@ -30,11 +26,7 @@ export const SearchBar: FC<SearchBarProps> = ({}) => {
         onChange={handleOnChange}
         className={styles.Input}
         rightSection={
-          <Button
-            onClick={handleSearch}
-            className={styles.Button}
-            radius={'md'}
-          >
+          <Button onClick={handleSearch} className={styles.Button} radius="md">
             Поиск
           </Button>
         }
