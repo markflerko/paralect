@@ -2,7 +2,7 @@ import { IVacancy } from 'interfaces/Vacancy.interface';
 import { getVacancyByIdThunkResponseType } from 'redux/thunks/getVacancyThunk';
 
 export const vacancyFieldMapper = (
-  vacancy: getVacancyByIdThunkResponseType
+  vacancy: getVacancyByIdThunkResponseType,
 ): IVacancy => {
   return {
     currency: vacancy?.currency,

@@ -7,7 +7,7 @@ export const getVacanciesThunkCb = (api: IVacanciesAPI) =>
     'vacanciesSlice/vacancies',
     async (dto, thunkApi) => {
       return await api.getVacancies(dto);
-    }
+    },
   );
 
 export default getVacanciesThunkCb;

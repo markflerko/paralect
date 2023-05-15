@@ -36,7 +36,7 @@ const catalogues = createSlice({
         state.isLoaded = true;
 
         return state;
-      }
+      },
     );
   },
 });

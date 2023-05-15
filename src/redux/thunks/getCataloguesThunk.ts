@@ -6,7 +6,7 @@ export const getCataloguesThunkCb = (api: ICataloguesAPI) =>
     'cataloguesSlice/catalogues',
     async (data, thunkApi) => {
       return await api.getCatalogues();
-    }
+    },
   );
 
 export default getCataloguesThunkCb;

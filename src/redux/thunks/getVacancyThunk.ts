@@ -21,7 +21,7 @@ export const getVacancyByIdThunkCb = (api: IVacanciesAPI) =>
     'vacanciesSlice/vacancy',
     async (id: string, thunkApi) => {
       return await api.getVacancyById(id);
-    }
+    },
   );
 
 export default getVacancyByIdThunkCb;

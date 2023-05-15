@@ -19,7 +19,7 @@ export const FilterTab: FC<FilterTabProps> = () => {
   const [paymentTo, setPaymentTo] = useState(0);
 
   const { data: industries, isLoaded } = useAppSelector(
-    ({ catalogues }) => catalogues
+    ({ catalogues }) => catalogues,
   );
 
   const industriesTitles = industries.map(({ title }) => title);
