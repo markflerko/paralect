@@ -18,6 +18,7 @@ export default class VacancyAPI extends API implements IVacanciesAPI {
     key = null,
     paymentFrom = null,
     paymentTo = null,
+    keyword,
   }: IVacanciesDto) {
     let queryString = `&page=${page}`;
 
@@ -27,8 +28,11 @@ export default class VacancyAPI extends API implements IVacanciesAPI {
     if (paymentFrom) {
       queryString += `&payment_from=${paymentFrom}`;
     }
-    if (paymentFrom) {
+    if (paymentTo) {
       queryString += `&payment_to=${paymentTo}`;
+    }
+    if (keyword) {
+      queryString += `&keyword=${keyword}`;
     }
 
     return this.instance
