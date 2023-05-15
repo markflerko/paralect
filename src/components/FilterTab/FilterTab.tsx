@@ -1,11 +1,12 @@
-import { Button, NumberInput, Paper, Text, Title } from '@mantine/core';
+import { Button, Paper, Text, Title } from '@mantine/core';
 import Cancel from 'assets/images/Cancel.svg';
 import { Dropdown } from 'components/Dropdown/Dropdown';
+import { MonetaryInput } from 'components/NumberInput/NumberInput';
 import { useAppSelector } from 'hooks/reduxHooks';
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'redux/store';
-import { getCataloguesThunk } from 'redux/thunks';
+import { getCataloguesThunk, getVacanciesThunk } from 'redux/thunks';
 import styles from './FilterTab.module.scss';
 
 export type FilterTabProps = {};
@@ -13,16 +14,23 @@ export type FilterTabProps = {};
 export const FilterTab: FC<FilterTabProps> = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+  const [industry, setIndustry] = useState('');
+  const [paymentFrom, setPaymentFrom] = useState(0);
+  const [paymentTo, setPaymentTo] = useState(0);
+
   const { data: industries, isLoaded } = useAppSelector(
     ({ catalogues }) => catalogues
   );
+
+  const industriesTitles = industries.map(({ title }) => title);
 
   useEffect(() => {
     dispatch(getCataloguesThunk());
   }, [dispatch]);
 
   const handleApply = () => {
-    console.log('handleSearch');
+    const { key } = industries.find((item) => item.title === industry) ?? {};
+    dispatch(getVacanciesThunk({ key, paymentFrom, paymentTo }));
   };
 
   if (!isLoaded) {
@@ -46,14 +54,16 @@ export const FilterTab: FC<FilterTabProps> = () => {
         <Text fw={700} mb={'xs'}>
           Отрасль
         </Text>
-        <Dropdown data={industries} />
+        <Dropdown data={industriesTitles} setIndustry={setIndustry} />
       </div>
       <div className={styles.SalaryContainer}>
         <Text fw={700} mb={'xs'}>
           Оклад
         </Text>
-        <NumberInput mb={'xs'} placeholder="От" />
-        <NumberInput placeholder="До" />
+        <div className={styles.PaymentFromContainer}>
+          <MonetaryInput placeholder="От" setValue={setPaymentFrom} />
+        </div>
+        <MonetaryInput placeholder="До" setValue={setPaymentTo} />
       </div>
       <Button onClick={handleApply} className={styles.Button} radius={'md'}>
         Применить

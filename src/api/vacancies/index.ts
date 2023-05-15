@@ -1,6 +1,6 @@
 import API from 'api';
 import { errorCaseResponse } from 'api/types';
-import { IVacanciesAPI } from 'api/vacancies/types';
+import { IVacanciesAPI, IVacanciesDto } from 'api/vacancies/types';
 
 const headers = {
   'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
@@ -13,9 +13,26 @@ export default class VacancyAPI extends API implements IVacanciesAPI {
     super(headers);
   }
 
-  public async getVacancies({ page = 0 }: { page?: number }) {
+  public async getVacancies({
+    page = 0,
+    key = null,
+    paymentFrom = null,
+    paymentTo = null,
+  }: IVacanciesDto) {
+    let queryString = `&page=${page}`;
+
+    if (key) {
+      queryString += `&catalogues=${key}`;
+    }
+    if (paymentFrom) {
+      queryString += `&payment_from=${paymentFrom}`;
+    }
+    if (paymentFrom) {
+      queryString += `&payment_to=${paymentTo}`;
+    }
+
     return this.instance
-      .get(`vacancies?count=4&page=${page}`)
+      .get(`vacancies?count=4&${queryString}`)
       .then((res) => res.data.objects)
       .catch(() => []);
   }

@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ICatalogueDto } from 'api/catalogues/types';
 import { getCataloguesThunk } from 'redux/thunks';
 
 export interface CataloguesState {
-  data: string[];
+  data: ICatalogueDto[];
   isLoaded: boolean;
 }
 
@@ -30,7 +31,7 @@ const catalogues = createSlice({
 
     builder.addCase(
       getCataloguesThunk.fulfilled,
-      (state: CataloguesState, { payload }: PayloadAction<string[]>) => {
+      (state: CataloguesState, { payload }: PayloadAction<ICatalogueDto[]>) => {
         state.data = payload;
         state.isLoaded = true;
 

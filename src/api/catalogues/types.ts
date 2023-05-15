@@ -1,3 +1,8 @@
+export interface ICatalogueDto {
+  title: string;
+  key: number;
+}
+
 export interface ICataloguesAPI {
-  getCatalogues(): Promise<string[]>;
+  getCatalogues(): Promise<ICatalogueDto[]>;
 }

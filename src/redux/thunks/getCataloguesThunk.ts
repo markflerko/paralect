@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ICataloguesAPI } from 'api/catalogues/types';
+import { ICatalogueDto, ICataloguesAPI } from 'api/catalogues/types';
 
 export const getCataloguesThunkCb = (api: ICataloguesAPI) =>
-  createAsyncThunk<string[]>(
+  createAsyncThunk<ICatalogueDto[]>(
     'cataloguesSlice/catalogues',
     async (data, thunkApi) => {
       return await api.getCatalogues();

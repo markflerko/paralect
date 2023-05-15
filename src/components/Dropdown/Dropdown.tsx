@@ -3,10 +3,15 @@ import { FC } from 'react';
 import { DropdownIcon } from './DropdownIcon';
 
 export type SearchBarProps = {
-  data: string[]
+  data: string[];
+  setIndustry: (value: string) => void;
 };
 
-export const Dropdown: FC<SearchBarProps> = ({data}) => {
+export const Dropdown: FC<SearchBarProps> = ({ data, setIndustry }) => {
+  const handleChange = (value: string) => {
+    setIndustry(value);
+  };
+
   return (
     <Select
       placeholder="Выберете отрасль"
@@ -14,6 +19,7 @@ export const Dropdown: FC<SearchBarProps> = ({data}) => {
       rightSectionWidth={30}
       styles={{ rightSection: { pointerEvents: 'none' } }}
       data={data}
+      onChange={handleChange}
     />
   );
 };

@@ -1,5 +1,5 @@
 import API from 'api';
-import { ICataloguesAPI } from 'api/catalogues/types';
+import { ICatalogueDto, ICataloguesAPI } from 'api/catalogues/types';
 
 const headers = {
   'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
@@ -15,7 +15,12 @@ export default class CataloguesAPI extends API implements ICataloguesAPI {
   public async getCatalogues() {
     return this.instance
       .get('catalogues')
-      .then((res) => res.data.map((item: { title: string }) => item?.title))
+      .then((res) =>
+        res.data.map(({ title, key }: ICatalogueDto) => ({
+          title,
+          key,
+        }))
+      )
       .catch(() => []);
   }
 }
