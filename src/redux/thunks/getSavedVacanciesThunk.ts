@@ -7,7 +7,7 @@ export const getSavedVacanciesThunkCb = (api: IVacanciesAPI) =>
     'savedSlice/saved',
     async (saved: number[], thunkApi) => {
       return await api.getSavedVacancies(saved);
-    }
+    },
   );
 
 export default getSavedVacanciesThunkCb;

@@ -19,7 +19,7 @@ export default class CataloguesAPI extends API implements ICataloguesAPI {
         res.data.map(({ title, key }: ICatalogueDto) => ({
           title,
           key,
-        }))
+        })),
       )
       .catch(() => []);
   }

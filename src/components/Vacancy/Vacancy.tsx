@@ -15,7 +15,7 @@ export type VacancyProps = {
   currency: string;
   id: number;
   isSaved: boolean;
-  displayType?: 'details' | 'list'
+  displayType?: 'details' | 'list';
 };
 
 export const Vacancy: FC<VacancyProps> = ({
@@ -27,11 +27,11 @@ export const Vacancy: FC<VacancyProps> = ({
   currency,
   id,
   isSaved,
-  displayType = 'list'
+  displayType = 'list',
 }) => {
   const [isStarActive, setIsStarActive] = useState(isSaved ?? false);
 
-  const titleColor = displayType === 'list' ? "#5E96FC" : '#232134';
+  const titleColor = displayType === 'list' ? '#5E96FC' : '#232134';
   const titleOrder = displayType === 'list' ? 3 : 1;
   const fz = displayType === 'list' ? 'md' : 'xl';
 

@@ -1,7 +1,7 @@
 import { Button } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import styles from './NotFound.module.scss';
-import NotFoundSvg from 'assets/images/NotFound.svg'
+import NotFoundSvg from 'assets/images/NotFound.svg';
 
 export function NotFound() {
   return (

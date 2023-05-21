@@ -44,13 +44,13 @@ const vacancy = createSlice({
       getVacancyByIdThunk.fulfilled,
       (
         state: VacancyState,
-        { payload }: PayloadAction<getVacancyByIdThunkResponseType>
+        { payload }: PayloadAction<getVacancyByIdThunkResponseType>,
       ) => {
         state.data = vacancyFieldMapper(payload);
         state.isLoaded = true;
 
         return state;
-      }
+      },
     );
   },
 });

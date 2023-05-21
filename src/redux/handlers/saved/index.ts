@@ -35,13 +35,13 @@ const saved = createSlice({
       getSavedVacanciesThunk.fulfilled,
       (
         state: SavedState,
-        { payload }: PayloadAction<getVacancyByIdThunkResponseType[]>
+        { payload }: PayloadAction<getVacancyByIdThunkResponseType[]>,
       ) => {
         state.data = payload.map(vacancyFieldMapper);
         state.isLoaded = true;
 
         return state;
-      }
+      },
     );
   },
 });
