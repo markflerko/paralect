@@ -2,31 +2,23 @@ import { Button, Paper, Text, Title } from '@mantine/core';
 import Cancel from 'assets/images/Cancel.svg';
 import { Dropdown } from 'components/Dropdown/Dropdown';
 import { MonetaryInput } from 'components/NumberInput/NumberInput';
-import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
+import { useAppDispatch } from 'hooks/reduxHooks';
+import { useCatalogues } from 'hooks/useCatalogues';
 import { LoaderLayout } from 'layouts/LoaderLayout';
-import { useEffect, useState } from 'react';
-import { getCataloguesThunk, getVacanciesThunk } from 'redux/thunks';
+import { useState } from 'react';
+import { getVacanciesThunk } from 'redux/thunks';
 import styles from './FilterTab.module.scss';
 
 export const FilterTab = () => {
   const dispatch = useAppDispatch();
 
   const [industry, setIndustry] = useState('');
-  const [paymentFrom, setPaymentFrom] = useState<number | ''>("");
-  const [paymentTo, setPaymentTo] = useState<number | ''>("");
+  const [paymentFrom, setPaymentFrom] = useState<number | ''>('');
+  const [paymentTo, setPaymentTo] = useState<number | ''>('');
 
-  const { data: industries, isLoaded } = useAppSelector(
-    ({ catalogues }) => catalogues,
-  );
-
-  const industriesTitles = industries.map(({ title }) => title);
-
-  useEffect(() => {
-    dispatch(getCataloguesThunk());
-  }, [dispatch]);
+  const { industriesTitles, key, isLoaded } = useCatalogues(industry);
 
   const handleApply = () => {
-    const { key } = industries.find((item) => item.title === industry) ?? {};
     dispatch(getVacanciesThunk({ key, paymentFrom, paymentTo }));
   };
 
