@@ -1,9 +1,9 @@
 import { PropsWithChildren } from 'react';
 
 export type LoaderLayoutProps = {
-  loaded: boolean;
+  isLoaded: boolean;
 } & PropsWithChildren;
 
-export function LoaderLayout({ children, loaded }: LoaderLayoutProps) {
-  return <>{loaded ? children : <>Loading...</>}</>;
+export function LoaderLayout({ children, isLoaded }: LoaderLayoutProps) {
+  return <>{isLoaded ? children : <>Loading...</>}</>;
 }

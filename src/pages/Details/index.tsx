@@ -1,17 +1,15 @@
 import { Paper } from '@mantine/core';
-import { useAppSelector } from 'hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { LoaderLayout } from 'layouts/LoaderLayout';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { AppDispatch } from 'redux/store';
 import { getVacancyByIdThunk } from 'redux/thunks';
 import { isSavedVacancy } from 'utils/isSavedVacancy';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Details.module.scss';
 
 export function Details() {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const { id } = useParams<{ id: string }>();
 
@@ -21,12 +19,8 @@ export function Details() {
     dispatch(getVacancyByIdThunk(id ?? ''));
   }, [id, dispatch]);
 
-  if (!isLoaded) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <LoaderLayout loaded={isLoaded}>
+    <LoaderLayout isLoaded={isLoaded}>
       <div className={styles.Container}>
         <Vacancy
           currency={vacancy.currency}

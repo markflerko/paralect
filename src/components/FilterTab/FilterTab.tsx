@@ -2,16 +2,14 @@ import { Button, Paper, Text, Title } from '@mantine/core';
 import Cancel from 'assets/images/Cancel.svg';
 import { Dropdown } from 'components/Dropdown/Dropdown';
 import { MonetaryInput } from 'components/NumberInput/NumberInput';
-import { useAppSelector } from 'hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { LoaderLayout } from 'layouts/LoaderLayout';
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'redux/store';
 import { getCataloguesThunk, getVacanciesThunk } from 'redux/thunks';
 import styles from './FilterTab.module.scss';
 
 export const FilterTab = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useAppDispatch();
 
   const [industry, setIndustry] = useState('');
   const [paymentFrom, setPaymentFrom] = useState(0);
@@ -33,7 +31,7 @@ export const FilterTab = () => {
   };
 
   return (
-    <LoaderLayout loaded={isLoaded}>
+    <LoaderLayout isLoaded={isLoaded}>
       <Paper className={styles.Container} radius={'lg'} p={'lg'}>
         <div className={styles.FirstRowContainer}>
           <Title order={3}>Фильтры</Title>

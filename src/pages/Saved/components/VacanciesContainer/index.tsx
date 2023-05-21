@@ -1,11 +1,6 @@
 import { Vacancy } from 'components/Vacancy/Vacancy';
-import { vacanciesOnPage } from 'configuration';
-import { useAppSelector } from 'hooks/reduxHooks';
+import { useSavedVacancies } from 'hooks/useSavedVacancies';
 import { LoaderLayout } from 'layouts/LoaderLayout';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'redux/store';
-import { getSavedVacanciesThunk } from 'redux/thunks';
 import { isSavedVacancy } from 'utils/isSavedVacancy';
 
 export type VacanciesContainerProps = {
@@ -17,20 +12,10 @@ export const VacanciesContainer = ({
   page,
   saved,
 }: VacanciesContainerProps) => {
-  const dispatch = useDispatch<AppDispatch>();
-
-  const { data: vacancies, isLoaded } = useAppSelector(({ saved }) => saved);
-
-  useEffect(() => {
-    const start = page * vacanciesOnPage;
-    const end = start + vacanciesOnPage;
-    const activePageVacanciesIds = saved.slice(start, end);
-
-    dispatch(getSavedVacanciesThunk(activePageVacanciesIds));
-  }, [page, dispatch, saved]);
+  const { vacancies, isLoaded } = useSavedVacancies(page, saved);
 
   return (
-    <LoaderLayout loaded={isLoaded}>
+    <LoaderLayout isLoaded={isLoaded}>
       {vacancies.map((vacancy) => (
         <Vacancy
           currency={vacancy?.currency}
