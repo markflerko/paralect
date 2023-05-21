@@ -1,5 +1,6 @@
 import { Vacancy } from 'components/Vacancy/Vacancy';
 import { useAppSelector } from 'hooks/reduxHooks';
+import { LoaderLayout } from 'layouts/LoaderLayout';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'redux/store';
@@ -24,12 +25,8 @@ export const VacanciesContainer: React.FC<VacanciesContainerProps> = ({
     dispatch(getVacanciesThunk({ page: activePage - 1 }));
   }, [dispatch, activePage]);
 
-  if (!isLoaded) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <>
+    <LoaderLayout loaded={isLoaded}>
       {vacancies.map((vacancy) => (
         <Vacancy
           currency={vacancy?.currency}
@@ -43,6 +40,6 @@ export const VacanciesContainer: React.FC<VacanciesContainerProps> = ({
           isSaved={saved.some((item) => item === vacancy?.id)}
         />
       ))}
-    </>
+    </LoaderLayout>
   );
 };

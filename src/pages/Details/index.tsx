@@ -1,5 +1,6 @@
 import { Paper } from '@mantine/core';
 import { useAppSelector } from 'hooks/reduxHooks';
+import { LoaderLayout } from 'layouts/LoaderLayout';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -19,7 +20,7 @@ export function Details() {
   useEffect(() => {
     async function getVacancies() {
       const saved = JSON.parse(
-        localStorage.getItem('saved') || '[]'
+        localStorage.getItem('saved') || '[]',
       ) as number[];
       setSaved(saved);
 
@@ -34,26 +35,28 @@ export function Details() {
   }
 
   return (
-    <div className={styles.Container}>
-      <Vacancy
-        currency={vacancy?.currency}
-        paymentAmountFrom={vacancy?.paymentAmountFrom}
-        paymentAmountTo={vacancy?.paymentAmountTo}
-        profession={vacancy?.profession}
-        town={vacancy?.town}
-        typeOfWork={vacancy?.typeOfWork}
-        key={vacancy?.id}
-        id={vacancy?.id}
-        isSaved={saved.some((item) => item === vacancy?.id)}
-        displayType="details"
-      />
-      <Paper
-        shadow="xs"
-        radius="lg"
-        p="xl"
-        className={styles.DescriptionContainer}
-        dangerouslySetInnerHTML={{ __html: vacancy?.vacancyRichText || '' }}
-      />
-    </div>
+    <LoaderLayout loaded={isLoaded}>
+      <div className={styles.Container}>
+        <Vacancy
+          currency={vacancy?.currency}
+          paymentAmountFrom={vacancy?.paymentAmountFrom}
+          paymentAmountTo={vacancy?.paymentAmountTo}
+          profession={vacancy?.profession}
+          town={vacancy?.town}
+          typeOfWork={vacancy?.typeOfWork}
+          key={vacancy?.id}
+          id={vacancy?.id}
+          isSaved={saved.some((item) => item === vacancy?.id)}
+          displayType="details"
+        />
+        <Paper
+          shadow="xs"
+          radius="lg"
+          p="xl"
+          className={styles.DescriptionContainer}
+          dangerouslySetInnerHTML={{ __html: vacancy?.vacancyRichText || '' }}
+        />
+      </div>
+    </LoaderLayout>
   );
 }

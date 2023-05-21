@@ -3,6 +3,7 @@ import Cancel from 'assets/images/Cancel.svg';
 import { Dropdown } from 'components/Dropdown/Dropdown';
 import { MonetaryInput } from 'components/NumberInput/NumberInput';
 import { useAppSelector } from 'hooks/reduxHooks';
+import { LoaderLayout } from 'layouts/LoaderLayout';
 import { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'redux/store';
@@ -19,7 +20,7 @@ export const FilterTab: FC<FilterTabProps> = () => {
   const [paymentTo, setPaymentTo] = useState(0);
 
   const { data: industries, isLoaded } = useAppSelector(
-    ({ catalogues }) => catalogues
+    ({ catalogues }) => catalogues,
   );
 
   const industriesTitles = industries.map(({ title }) => title);
@@ -33,42 +34,40 @@ export const FilterTab: FC<FilterTabProps> = () => {
     dispatch(getVacanciesThunk({ key, paymentFrom, paymentTo }));
   };
 
-  if (!isLoaded) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <Paper className={styles.Container} radius={'lg'} p={'lg'}>
-      <div className={styles.FirstRowContainer}>
-        <Title order={3}>Фильтры</Title>
-        <div className={styles.CancelContainer}>
-          <Text color="#ACADB9" fw={500} fz={'sm'}>
-            Сбросить все
-          </Text>
-          <div className={styles.Cancel}>
-            <img src={Cancel} alt="Cancel" />
+    <LoaderLayout loaded={isLoaded}>
+      <Paper className={styles.Container} radius={'lg'} p={'lg'}>
+        <div className={styles.FirstRowContainer}>
+          <Title order={3}>Фильтры</Title>
+          <div className={styles.CancelContainer}>
+            <Text color="#ACADB9" fw={500} fz={'sm'}>
+              Сбросить все
+            </Text>
+            <div className={styles.Cancel}>
+              <img src={Cancel} alt="Cancel" />
+            </div>
           </div>
         </div>
-      </div>
-      <div className={styles.IndustryContainer}>
-        <Text fw={700} mb={'xs'}>
-          Отрасль
-        </Text>
-        <Dropdown data={industriesTitles} setIndustry={setIndustry} />
-      </div>
-      <div className={styles.SalaryContainer}>
-        <Text fw={700} mb={'xs'}>
-          Оклад
-        </Text>
-        <div className={styles.PaymentFromContainer}>
-          <MonetaryInput placeholder="От" setValue={setPaymentFrom} />
+        <div className={styles.IndustryContainer}>
+          <Text fw={700} mb={'xs'}>
+            Отрасль
+          </Text>
+          <Dropdown data={industriesTitles} setIndustry={setIndustry} />
         </div>
-        <MonetaryInput placeholder="До" setValue={setPaymentTo} />
-      </div>
-      <Button onClick={handleApply} className={styles.Button} radius={'md'}>
-        Применить
-      </Button>
-    </Paper>
+        <div className={styles.SalaryContainer}>
+          <Text fw={700} mb={'xs'}>
+            Оклад
+          </Text>
+          <div className={styles.PaymentFromContainer}>
+            <MonetaryInput placeholder="От" setValue={setPaymentFrom} />
+          </div>
+          <MonetaryInput placeholder="До" setValue={setPaymentTo} />
+        </div>
+        <Button onClick={handleApply} className={styles.Button} radius={'md'}>
+          Применить
+        </Button>
+      </Paper>
+    </LoaderLayout>
   );
 };
 
