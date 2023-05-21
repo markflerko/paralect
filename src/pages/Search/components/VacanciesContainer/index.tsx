@@ -17,7 +17,7 @@ export const VacanciesContainer: React.FC<VacanciesContainerProps> = ({
   const dispatch = useDispatch<AppDispatch>();
 
   const { data: vacancies, isLoaded } = useAppSelector(
-    ({ vacancies }) => vacancies
+    ({ vacancies }) => vacancies,
   );
 
   useEffect(() => {
