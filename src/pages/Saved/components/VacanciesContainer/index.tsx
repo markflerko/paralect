@@ -12,10 +12,10 @@ export type VacanciesContainerProps = {
   saved: number[];
 };
 
-export const VacanciesContainer: React.FC<VacanciesContainerProps> = ({
+export const VacanciesContainer = ({
   activePageAsIndex,
   saved,
-}) => {
+}: VacanciesContainerProps) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const { data: vacancies, isLoaded } = useAppSelector(({ saved }) => saved);

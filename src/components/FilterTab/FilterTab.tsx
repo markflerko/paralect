@@ -4,15 +4,13 @@ import { Dropdown } from 'components/Dropdown/Dropdown';
 import { MonetaryInput } from 'components/NumberInput/NumberInput';
 import { useAppSelector } from 'hooks/reduxHooks';
 import { LoaderLayout } from 'layouts/LoaderLayout';
-import { FC, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'redux/store';
 import { getCataloguesThunk, getVacanciesThunk } from 'redux/thunks';
 import styles from './FilterTab.module.scss';
 
-export type FilterTabProps = {};
-
-export const FilterTab: FC<FilterTabProps> = () => {
+export const FilterTab = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const [industry, setIndustry] = useState('');

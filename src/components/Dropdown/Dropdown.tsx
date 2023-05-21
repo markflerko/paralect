@@ -1,5 +1,4 @@
 import { Select } from '@mantine/core';
-import { FC } from 'react';
 import { DropdownIcon } from './DropdownIcon';
 
 export type SearchBarProps = {
@@ -7,7 +6,7 @@ export type SearchBarProps = {
   setIndustry: (value: string) => void;
 };
 
-export const Dropdown: FC<SearchBarProps> = ({ data, setIndustry }) => {
+export const Dropdown = ({ data, setIndustry }: SearchBarProps) => {
   const handleChange = (value: string) => {
     setIndustry(value);
   };

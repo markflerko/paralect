@@ -3,7 +3,7 @@ import Dot from 'assets/images/Dot.svg';
 import Location from 'assets/images/Location.svg';
 import Star from 'assets/images/Star.svg';
 import StarActive from 'assets/images/StarActive.svg';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import styles from './Vacancy.module.scss';
 
 export type VacancyProps = {
@@ -18,7 +18,7 @@ export type VacancyProps = {
   displayType?: 'details' | 'list';
 };
 
-export const Vacancy: FC<VacancyProps> = ({
+export const Vacancy = ({
   profession,
   town,
   typeOfWork,
@@ -28,7 +28,7 @@ export const Vacancy: FC<VacancyProps> = ({
   id,
   isSaved,
   displayType = 'list',
-}) => {
+}: VacancyProps) => {
   const [isStarActive, setIsStarActive] = useState(isSaved ?? false);
 
   const titleColor = displayType === 'list' ? '#5E96FC' : '#232134';
