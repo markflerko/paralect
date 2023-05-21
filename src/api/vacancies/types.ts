@@ -3,8 +3,8 @@ import { getVacancyByIdThunkResponseType } from 'redux/thunks/getVacancyThunk';
 export interface IVacanciesDto {
   page?: number;
   key?: number | null;
-  paymentFrom?: number | null;
-  paymentTo?: number | null;
+  paymentFrom?: number | null | '';
+  paymentTo?: number | null | '';
   keyword?: string | null;
 }
 

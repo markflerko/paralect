@@ -12,8 +12,8 @@ export const FilterTab = () => {
   const dispatch = useAppDispatch();
 
   const [industry, setIndustry] = useState('');
-  const [paymentFrom, setPaymentFrom] = useState(0);
-  const [paymentTo, setPaymentTo] = useState(0);
+  const [paymentFrom, setPaymentFrom] = useState<number | ''>("");
+  const [paymentTo, setPaymentTo] = useState<number | ''>("");
 
   const { data: industries, isLoaded } = useAppSelector(
     ({ catalogues }) => catalogues,
@@ -30,12 +30,18 @@ export const FilterTab = () => {
     dispatch(getVacanciesThunk({ key, paymentFrom, paymentTo }));
   };
 
+  const handleCancelClick = () => {
+    setIndustry('');
+    setPaymentFrom('');
+    setPaymentTo('');
+  };
+
   return (
     <LoaderLayout isLoaded={isLoaded}>
       <Paper className={styles.Container} radius={'lg'} p={'lg'}>
         <div className={styles.FirstRowContainer}>
           <Title order={3}>Фильтры</Title>
-          <div className={styles.CancelContainer}>
+          <div className={styles.CancelContainer} onClick={handleCancelClick}>
             <Text color="#ACADB9" fw={500} fz={'sm'}>
               Сбросить все
             </Text>
@@ -48,16 +54,28 @@ export const FilterTab = () => {
           <Text fw={700} mb={'xs'}>
             Отрасль
           </Text>
-          <Dropdown data={industriesTitles} setIndustry={setIndustry} />
+          <Dropdown
+            data={industriesTitles}
+            setIndustry={setIndustry}
+            value={industry}
+          />
         </div>
         <div className={styles.SalaryContainer}>
           <Text fw={700} mb={'xs'}>
             Оклад
           </Text>
           <div className={styles.PaymentFromContainer}>
-            <MonetaryInput placeholder="От" setValue={setPaymentFrom} />
+            <MonetaryInput
+              placeholder="От"
+              setValue={setPaymentFrom}
+              value={paymentFrom}
+            />
           </div>
-          <MonetaryInput placeholder="До" setValue={setPaymentTo} />
+          <MonetaryInput
+            placeholder="До"
+            setValue={setPaymentTo}
+            value={paymentTo}
+          />
         </div>
         <Button onClick={handleApply} className={styles.Button} radius={'md'}>
           Применить

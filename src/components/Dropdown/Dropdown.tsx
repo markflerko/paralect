@@ -4,9 +4,10 @@ import { DropdownIcon } from './DropdownIcon';
 export type SearchBarProps = {
   data: string[];
   setIndustry: (value: string) => void;
+  value: string;
 };
 
-export const Dropdown = ({ data, setIndustry }: SearchBarProps) => {
+export const Dropdown = ({ data, setIndustry, value }: SearchBarProps) => {
   const handleChange = (value: string) => {
     setIndustry(value);
   };
@@ -19,6 +20,7 @@ export const Dropdown = ({ data, setIndustry }: SearchBarProps) => {
       styles={{ rightSection: { pointerEvents: 'none' } }}
       data={data}
       onChange={handleChange}
+      value={value}
     />
   );
 };
