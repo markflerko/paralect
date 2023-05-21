@@ -4,6 +4,8 @@ import Location from 'assets/images/Location.svg';
 import Star from 'assets/images/Star.svg';
 import StarActive from 'assets/images/StarActive.svg';
 import { useState } from 'react';
+import { getSavedVacancyIds } from 'utils/getSavedVacancyIds';
+import { setSavedVacancyIds } from 'utils/setSavedVacancyIds';
 import styles from './Vacancy.module.scss';
 
 export type VacancyProps = {
@@ -36,17 +38,17 @@ export const Vacancy = ({
   const fz = displayType === 'list' ? 'md' : 'xl';
 
   const handleStarClick = () => {
-    let saved = JSON.parse(localStorage.getItem('saved') || '[]') as number[];
-    const index = saved.indexOf(id);
+    let savedVacancyIds = getSavedVacancyIds();
+    const index = savedVacancyIds.indexOf(id);
 
     //if there is item - remove, no - delete
     if (index === -1) {
-      saved = [...saved, id];
+      savedVacancyIds = [...savedVacancyIds, id];
     } else {
-      saved.splice(index, 1);
+      savedVacancyIds.splice(index, 1);
     }
 
-    localStorage.setItem('saved', JSON.stringify(saved));
+    setSavedVacancyIds(savedVacancyIds);
 
     setIsStarActive(!isStarActive);
   };

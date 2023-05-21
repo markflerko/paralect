@@ -1,33 +1,24 @@
 import { Paper } from '@mantine/core';
 import { useAppSelector } from 'hooks/reduxHooks';
 import { LoaderLayout } from 'layouts/LoaderLayout';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { AppDispatch } from 'redux/store';
 import { getVacancyByIdThunk } from 'redux/thunks';
+import { isSavedVacancy } from 'utils/isSavedVacancy';
 import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Details.module.scss';
 
 export function Details() {
   const dispatch = useDispatch<AppDispatch>();
 
-  const [saved, setSaved] = useState<number[]>([]);
   const { id } = useParams<{ id: string }>();
 
   const { data: vacancy, isLoaded } = useAppSelector(({ vacancy }) => vacancy);
 
   useEffect(() => {
-    async function getVacancies() {
-      const saved = JSON.parse(
-        localStorage.getItem('saved') || '[]',
-      ) as number[];
-      setSaved(saved);
-
-      dispatch(getVacancyByIdThunk(id ?? ''));
-    }
-
-    getVacancies();
+    dispatch(getVacancyByIdThunk(id ?? ''));
   }, [id, dispatch]);
 
   if (!isLoaded) {
@@ -38,15 +29,15 @@ export function Details() {
     <LoaderLayout loaded={isLoaded}>
       <div className={styles.Container}>
         <Vacancy
-          currency={vacancy?.currency}
-          paymentAmountFrom={vacancy?.paymentAmountFrom}
-          paymentAmountTo={vacancy?.paymentAmountTo}
-          profession={vacancy?.profession}
-          town={vacancy?.town}
-          typeOfWork={vacancy?.typeOfWork}
-          key={vacancy?.id}
-          id={vacancy?.id}
-          isSaved={saved.some((item) => item === vacancy?.id)}
+          currency={vacancy.currency}
+          paymentAmountFrom={vacancy.paymentAmountFrom}
+          paymentAmountTo={vacancy.paymentAmountTo}
+          profession={vacancy.profession}
+          town={vacancy.town}
+          typeOfWork={vacancy.typeOfWork}
+          key={vacancy.id}
+          id={vacancy.id}
+          isSaved={isSavedVacancy(vacancy.id)}
           displayType="details"
         />
         <Paper

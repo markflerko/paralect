@@ -6,14 +6,15 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from 'redux/store';
 import { getSavedVacanciesThunk } from 'redux/thunks';
+import { isSavedVacancy } from 'utils/isSavedVacancy';
 
 export type VacanciesContainerProps = {
-  activePageAsIndex: number;
+  page: number;
   saved: number[];
 };
 
 export const VacanciesContainer = ({
-  activePageAsIndex,
+  page,
   saved,
 }: VacanciesContainerProps) => {
   const dispatch = useDispatch<AppDispatch>();
@@ -21,12 +22,12 @@ export const VacanciesContainer = ({
   const { data: vacancies, isLoaded } = useAppSelector(({ saved }) => saved);
 
   useEffect(() => {
-    const start = activePageAsIndex * vacanciesOnPage;
+    const start = page * vacanciesOnPage;
     const end = start + vacanciesOnPage;
     const activePageVacanciesIds = saved.slice(start, end);
 
     dispatch(getSavedVacanciesThunk(activePageVacanciesIds));
-  }, [activePageAsIndex, dispatch, saved]);
+  }, [page, dispatch, saved]);
 
   return (
     <LoaderLayout loaded={isLoaded}>
@@ -40,7 +41,7 @@ export const VacanciesContainer = ({
           typeOfWork={vacancy?.typeOfWork}
           key={vacancy?.id}
           id={vacancy?.id}
-          isSaved={saved.some((item) => item === vacancy?.id)}
+          isSaved={isSavedVacancy(vacancy.id)}
         />
       ))}
     </LoaderLayout>
