@@ -1,5 +1,5 @@
 import { Button, Input } from '@mantine/core';
-import { useAppDispatch } from 'hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { useState } from 'react';
 import { setFilters } from 'redux/handlers/filters';
 import { getVacanciesThunk } from 'redux/thunks';
@@ -11,9 +11,11 @@ export const SearchBar = () => {
 
   const [query, setQuery] = useState<string>('');
 
+  const filters = useAppSelector(({ filters }) => filters);
+
   const handleSearch = () => {
     dispatch(setFilters({ keyword: query }));
-    dispatch(getVacanciesThunk({ keyword: query }));
+    dispatch(getVacanciesThunk({ ...filters, keyword: query }));
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {

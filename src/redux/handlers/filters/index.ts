@@ -1,20 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IVacanciesDto } from 'api/vacancies/types';
 
-export interface FiltersState {
-  keyword: string;
-}
-
-const initialState: FiltersState = {
-  keyword: '',
-};
+const initialState: IVacanciesDto = {};
 
 const filters = createSlice({
   name: 'filters',
   initialState,
   reducers: {
     setFilters: (
-      state: FiltersState,
-      { payload }: PayloadAction<FiltersState>,
+      state: IVacanciesDto,
+      { payload }: PayloadAction<IVacanciesDto>,
     ) => {
       state = { ...state, ...payload };
       return state;

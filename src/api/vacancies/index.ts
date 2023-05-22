@@ -35,6 +35,8 @@ export default class VacancyAPI extends API implements IVacanciesAPI {
       queryString += `&keyword=${keyword}`;
     }
 
+    console.log(queryString);
+
     return this.instance
       .get(`vacancies?count=4&${queryString}`)
       .then((res) => res.data.objects)

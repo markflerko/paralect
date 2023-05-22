@@ -2,10 +2,11 @@ import { Button, Paper, Text, Title } from '@mantine/core';
 import Cancel from 'assets/images/Cancel.svg';
 import { Dropdown } from 'components/Dropdown/Dropdown';
 import { MonetaryInput } from 'components/NumberInput/NumberInput';
-import { useAppDispatch } from 'hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { useCatalogues } from 'hooks/useCatalogues';
 import { LoaderLayout } from 'layouts/LoaderLayout';
 import { useState } from 'react';
+import { setFilters } from 'redux/handlers/filters';
 import { getVacanciesThunk } from 'redux/thunks';
 import styles from './FilterTab.module.scss';
 
@@ -17,9 +18,11 @@ export const FilterTab = () => {
   const [paymentTo, setPaymentTo] = useState<number | ''>('');
 
   const { industriesTitles, key, isLoaded } = useCatalogues(industry);
+  const filters = useAppSelector(({ filters }) => filters);
 
   const handleApply = () => {
-    dispatch(getVacanciesThunk({ key, paymentFrom, paymentTo }));
+    dispatch(setFilters({ key, paymentFrom, paymentTo }));
+    dispatch(getVacanciesThunk({ ...filters, key, paymentFrom, paymentTo }));
   };
 
   const handleCancelClick = () => {

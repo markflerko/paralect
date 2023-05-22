@@ -5,7 +5,7 @@ export interface IVacanciesDto {
   key?: number | null;
   paymentFrom?: number | null | '';
   paymentTo?: number | null | '';
-  keyword?: string | null;
+  keyword?: string | "";
 }
 
 export interface IVacanciesAPI {
