@@ -1,6 +1,7 @@
 import { Button, Input } from '@mantine/core';
 import { useAppDispatch } from 'hooks/reduxHooks';
 import { useState } from 'react';
+import { setFilters } from 'redux/handlers/filters';
 import { getVacanciesThunk } from 'redux/thunks';
 import styles from './SearchBar.module.scss';
 import { SearchIcon } from './SearchIcon';
@@ -11,6 +12,7 @@ export const SearchBar = () => {
   const [query, setQuery] = useState<string>('');
 
   const handleSearch = () => {
+    dispatch(setFilters({ keyword: query }));
     dispatch(getVacanciesThunk({ keyword: query }));
   };
 

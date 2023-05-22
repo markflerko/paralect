@@ -8,9 +8,11 @@ export const useSearchVacancies = (page: number) => {
     ({ vacancies }) => vacancies,
   );
 
+  const filters = useAppSelector(({ filters }) => filters);
+
   useEffect(() => {
-    dispatch(getVacanciesThunk({ page }));
-  }, [dispatch, page]);
+    dispatch(getVacanciesThunk({ ...filters, page }));
+  }, [dispatch, page, filters]);
 
   return { vacancies, isLoaded };
 };
