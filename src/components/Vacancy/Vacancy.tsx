@@ -40,7 +40,8 @@ export const Vacancy = ({
   const titleOrder = displayType === 'list' ? 3 : 1;
   const fz = displayType === 'list' ? 'md' : 'xl';
 
-  const handleStarClick = () => {
+  const handleStarClick = (event: any) => {
+    event.stopPropagation()
     let savedVacancyIds = getSavedVacancyIds();
     const index = savedVacancyIds.indexOf(id);
 
