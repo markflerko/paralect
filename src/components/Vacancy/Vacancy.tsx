@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { getSavedVacancyIds } from 'utils/getSavedVacancyIds';
 import { setSavedVacancyIds } from 'utils/setSavedVacancyIds';
 import styles from './Vacancy.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 export type VacancyProps = {
   profession: string;
@@ -31,6 +32,8 @@ export const Vacancy = ({
   isSaved,
   displayType = 'list',
 }: VacancyProps) => {
+  const navigate = useNavigate();
+
   const [isStarActive, setIsStarActive] = useState(isSaved ?? false);
 
   const titleColor = displayType === 'list' ? '#5E96FC' : '#232134';
@@ -53,6 +56,10 @@ export const Vacancy = ({
     setIsStarActive(!isStarActive);
   };
 
+  const handleOnClick = () => {
+    navigate(`/details/${id}`);
+  };
+
   return (
     <Paper
       shadow="xs"
@@ -60,6 +67,7 @@ export const Vacancy = ({
       p="lg"
       m="sm"
       className={styles.VacancyContainer}
+      onClick={handleOnClick}
     >
       <div className={styles.FirstRowContainer}>
         <Title order={titleOrder} color={titleColor} className={styles.Title}>
