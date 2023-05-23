@@ -2,11 +2,23 @@
   display: flex;
   align-items: center;
   padding: 0 8rem;
+
+  @media (max-width: 800px) {
+    padding: 0 2rem;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0 0.75rem;
+  }
 }
 
 .Logo img {
   height: 30px;
   width: 100%;
+
+  @media (max-width: 480px) {
+    min-width: 80%;
+  }
 }
 
 .Menu {
@@ -18,4 +30,11 @@
     color: #5e96fc;
     cursor: pointer;
   }
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }

@@ -20,8 +20,12 @@ export const CustomHeader = () => {
         <img src={Logo} alt="Logo" />
       </div>
       <div className={styles.Menu}>
-        <Text onClick={handleSearchClick}>Поиск вакансий</Text>
-        <Text onClick={handleFavoritesClick}>Избранное</Text>
+        <Text onClick={handleSearchClick} className={styles.text}>
+          Поиск вакансий
+        </Text>
+        <Text onClick={handleFavoritesClick} className={styles.text}>
+          Избранное
+        </Text>
       </div>
     </Header>
   );
