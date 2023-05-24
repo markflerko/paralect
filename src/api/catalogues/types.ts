@@ -1,5 +1,6 @@
 export interface ICatalogueDto {
   title: string;
+  title_trimmed: string;
   key: number;
 }
 

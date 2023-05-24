@@ -7,13 +7,21 @@ export const useAuth = () => {
 
   useEffect(() => {
     const authLogic = async () => {
-      const refreshToken = localStorage.getItem('refreshToken');
+      const refreshToken = localStorage.getItem(
+        process.env.REACT_APP_REFRESH_TOKEN_STORAGE_NAME as string,
+      );
       if (!refreshToken) {
         const { refresh_token } = await dispatch(getAuthThunk()).unwrap();
-        localStorage.setItem('refreshToken', refresh_token);
+        localStorage.setItem(
+          process.env.REACT_APP_REFRESH_TOKEN_STORAGE_NAME as string,
+          refresh_token,
+        );
       } else {
         const { refresh_token } = await dispatch(getRefreshThunk()).unwrap();
-        localStorage.setItem('refreshToken', refresh_token);
+        localStorage.setItem(
+          process.env.REACT_APP_REFRESH_TOKEN_STORAGE_NAME as string,
+          refresh_token,
+        );
       }
     };
     authLogic();

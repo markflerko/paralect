@@ -2,9 +2,7 @@ import API from 'api';
 import { ICatalogueDto, ICataloguesAPI } from 'api/catalogues/types';
 
 const headers = {
-  'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
-  'X-Api-App-Id':
-    'v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948',
+  'X-Api-App-Id': process.env.REACT_APP_X_API_APP_ID as string,
 };
 
 export default class CataloguesAPI extends API implements ICataloguesAPI {
@@ -16,8 +14,8 @@ export default class CataloguesAPI extends API implements ICataloguesAPI {
     return this.instance
       .get('catalogues')
       .then((res) =>
-        res.data.map(({ title, key }: ICatalogueDto) => ({
-          title,
+        res.data.map(({ title, key, title_trimmed }: ICatalogueDto) => ({
+          title: title_trimmed,
           key,
         })),
       )

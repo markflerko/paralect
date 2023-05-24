@@ -3,10 +3,13 @@ import axios, { AxiosInstance } from 'axios';
 export default class API {
   protected instance: AxiosInstance;
 
-  constructor(headers: Record<string, string>) {
+  constructor(headers?: Record<string, string>) {
     this.instance = axios.create({
-      baseURL: 'https://startup-summer-2023-proxy.onrender.com/2.0/',
-      headers,
+      baseURL: process.env.REACT_APP_API_URL,
+      headers: {
+        'x-secret-key': process.env.REACT_APP_X_SECRET_KEY as string,
+        ...headers,
+      },
     });
   }
 }
