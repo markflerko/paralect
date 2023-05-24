@@ -5,7 +5,7 @@ import { Details } from 'pages/Details';
 import { Saved } from 'pages/Saved';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { getAuthThunk } from 'redux/thunks';
+import { getAuthThunk, getRefreshThunk } from 'redux/thunks';
 import { NotFound } from './pages/NotFound';
 import { Search } from './pages/Search';
 
@@ -13,7 +13,17 @@ export default function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getAuthThunk());
+    const authLogic = async () => {
+      const refreshToken = localStorage.getItem('refreshToken');
+      if (!refreshToken) {
+        const { refresh_token } = await dispatch(getAuthThunk()).unwrap();
+        localStorage.setItem('refreshToken', refresh_token);
+      } else {
+        const { refresh_token } = await dispatch(getRefreshThunk()).unwrap();
+        localStorage.setItem('refreshToken', refresh_token);
+      }
+    };
+    authLogic();
   }, [dispatch]);
 
   const { isAuth, isError, isLoaded, message } = useAppSelector(

@@ -3,6 +3,7 @@ import CataloguesAPI from 'api/catalogues';
 import VacancyAPI from 'api/vacancies';
 import getAuthThunkCb from 'redux/thunks/getAuthThunk';
 import getCataloguesThunkCb from 'redux/thunks/getCataloguesThunk';
+import getRefreshThunkCb from 'redux/thunks/getRefreshThunk';
 import getSavedVacanciesThunkCb from 'redux/thunks/getSavedVacanciesThunk';
 import getVacanciesThunkCb from 'redux/thunks/getVacanciesThunk';
 import getVacancyByIdThunkCb from 'redux/thunks/getVacancyThunk';
@@ -10,6 +11,7 @@ import getVacancyByIdThunkCb from 'redux/thunks/getVacancyThunk';
 const authAPI = new AuthAPI();
 
 export const getAuthThunk = getAuthThunkCb(authAPI);
+export const getRefreshThunk = getRefreshThunkCb(authAPI);
 
 const vacancyAPI = new VacancyAPI();
 

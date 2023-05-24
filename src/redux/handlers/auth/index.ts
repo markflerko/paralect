@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { getAuthThunk } from 'redux/thunks';
+import { getAuthThunk, getRefreshThunk } from 'redux/thunks';
 
 export interface AuthType {
   isAuth: boolean;
@@ -36,6 +36,19 @@ const auth = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getRefreshThunk.pending, (state) => {
+      pendingState(state);
+    });
+
+    builder.addCase(getRefreshThunk.rejected, (state, action: any) => {
+      rejectedState(state, action);
+    });
+
+    builder.addCase(getRefreshThunk.fulfilled, (state) => {
+      state.isLoaded = true;
+      state.isAuth = true;
+    });
+
     builder.addCase(getAuthThunk.pending, (state) => {
       pendingState(state);
     });

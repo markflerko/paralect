@@ -6,4 +6,5 @@ export interface IAuthResDto {
 
 export interface IAuthAPI {
   login(): Promise<IAuthResDto>;
+  refresh(): Promise<IAuthResDto>;
 }
