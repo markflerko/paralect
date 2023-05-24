@@ -1,10 +1,16 @@
 import { AppLayout, AuthLayout, LoaderLayout } from 'components/layouts';
 import { Details, NotFound, Saved, Search } from 'components/pages';
 import { useAuth } from 'hooks/useAuth';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 export default function App() {
+  const navigate = useNavigate();
+
   const { isAuth, isError, isLoaded, message } = useAuth();
+
+  if (isLoaded && isAuth && window.location.pathname === '/') {
+    navigate('/search');
+  }
 
   return (
     <LoaderLayout isLoaded={isLoaded}>
