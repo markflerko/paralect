@@ -18,7 +18,7 @@ export type VacancyProps = {
   currency: string;
   id: number;
   isSaved: boolean;
-  isLoaded?: boolean;
+  isLoaded: boolean;
   displayType?: 'details' | 'list';
 };
 
@@ -32,12 +32,13 @@ export function Vacancy({
   id,
   isSaved,
   displayType = 'list',
-  isLoaded = false,
+  isLoaded,
 }: VacancyProps) {
   const navigate = useNavigate();
 
   const [isStarActive, setIsStarActive] = useState(isSaved ?? false);
 
+  const height = displayType === 'list' ? '9rem' : '11rem';
   const titleColor = displayType === 'list' ? '#5E96FC' : '#232134';
   const titleOrder = displayType === 'list' ? 3 : 1;
   const fz = displayType === 'list' ? 'md' : 'xl';
@@ -60,6 +61,7 @@ export function Vacancy({
   };
 
   const handleOnClick = () => {
+    if (displayType !== 'list') return;
     navigate(`/details/${id}`);
   };
 
@@ -72,6 +74,9 @@ export function Vacancy({
       className={styles.VacancyContainer}
       onClick={handleOnClick}
       data-elem={`vacancy-${id}`}
+      style={{
+        height: height,
+      }}
     >
       {!isLoaded ? (
         <Loader
