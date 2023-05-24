@@ -8,7 +8,7 @@ import styles from './Search.module.scss';
 
 export function Search() {
   const [industry, setIndustry] = useState('');
-  const { industriesTitles, key, isLoaded } = useCatalogues(industry);
+  const { industriesTitles, key } = useCatalogues(industry);
 
   const savedVacancyIds = getSavedVacancyIds();
   const [activePage, setPage] = useState(1);
@@ -26,7 +26,6 @@ export function Search() {
           setIndustry={setIndustry}
           industriesTitles={industriesTitles}
           industryKey={key}
-          isLoaded={isLoaded}
         />
       </div>
       <div className={styles.SecondColumnContainer}>
@@ -47,7 +46,6 @@ export function Search() {
               setIndustry={setIndustry}
               industriesTitles={industriesTitles}
               industryKey={key}
-              isLoaded={isLoaded}
             />
           </div>
         )}

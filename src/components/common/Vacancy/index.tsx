@@ -1,4 +1,4 @@
-import { Paper, Text, Title } from '@mantine/core';
+import { Loader, Paper, Text, Title } from '@mantine/core';
 import Dot from 'assets/images/Dot.svg';
 import Location from 'assets/images/Location.svg';
 import Star from 'assets/images/Star.svg';
@@ -18,6 +18,7 @@ export type VacancyProps = {
   currency: string;
   id: number;
   isSaved: boolean;
+  isLoaded?: boolean;
   displayType?: 'details' | 'list';
 };
 
@@ -31,6 +32,7 @@ export function Vacancy({
   id,
   isSaved,
   displayType = 'list',
+  isLoaded = false,
 }: VacancyProps) {
   const navigate = useNavigate();
 
@@ -71,37 +73,52 @@ export function Vacancy({
       onClick={handleOnClick}
       data-elem={`vacancy-${id}`}
     >
-      <div className={styles.FirstRowContainer}>
-        <Title order={titleOrder} color={titleColor} className={styles.Title}>
-          {profession}
-        </Title>
-        <button
-          className={styles.Star}
-          onClick={handleStarClick}
-          data-elem={`vacancy-${id}-shortlist-button`}
-        >
-          {isStarActive ? (
-            <img src={StarActive} alt="StarActive" />
-          ) : (
-            <img src={Star} alt="Star" />
-          )}
-        </button>
-      </div>
-      <div className={styles.SecondRowContainer}>
-        <Text fw={700} fz={fz}>
-          з/п {paymentAmountFrom} - {paymentAmountTo} {currency}
-        </Text>
-        <div>
-          <img src={Dot} alt="Dot" />
-        </div>
-        <Text fz={fz}>{typeOfWork}</Text>
-      </div>
-      <div className={styles.ThirdRowContainer}>
-        <div className={styles.Location}>
-          <img src={Location} alt="Location" />
-        </div>
-        <Text fz={fz}>{town}</Text>
-      </div>
+      {!isLoaded ? (
+        <Loader
+          size="xl"
+          variant="oval"
+          color="#228BE6"
+          className={styles.loader}
+        />
+      ) : (
+        <>
+          <div className={styles.FirstRowContainer}>
+            <Title
+              order={titleOrder}
+              color={titleColor}
+              className={styles.Title}
+            >
+              {profession}
+            </Title>
+            <button
+              className={styles.Star}
+              onClick={handleStarClick}
+              data-elem={`vacancy-${id}-shortlist-button`}
+            >
+              {isStarActive ? (
+                <img src={StarActive} alt="StarActive" />
+              ) : (
+                <img src={Star} alt="Star" />
+              )}
+            </button>
+          </div>
+          <div className={styles.SecondRowContainer}>
+            <Text fw={700} fz={fz}>
+              з/п {paymentAmountFrom} - {paymentAmountTo} {currency}
+            </Text>
+            <div>
+              <img src={Dot} alt="Dot" />
+            </div>
+            <Text fz={fz}>{typeOfWork}</Text>
+          </div>
+          <div className={styles.ThirdRowContainer}>
+            <div className={styles.Location}>
+              <img src={Location} alt="Location" />
+            </div>
+            <Text fz={fz}>{town}</Text>
+          </div>
+        </>
+      )}
     </Paper>
   );
 }

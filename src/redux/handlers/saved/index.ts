@@ -10,7 +10,12 @@ export interface SavedState {
 }
 
 export const initialState: SavedState = {
-  data: [],
+  data: [
+    { id: 'vacancy-5' },
+    { id: 'vacancy-6' },
+    { id: 'vacancy-7' },
+    { id: 'vacancy-8' },
+  ] as unknown as IVacancy[],
   isLoaded: false,
 };
 

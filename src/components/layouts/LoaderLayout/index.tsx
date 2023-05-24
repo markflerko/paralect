@@ -1,3 +1,4 @@
+import { LoadingOverlay } from '@mantine/core';
 import { PropsWithChildren } from 'react';
 
 export type LoaderLayoutProps = {
@@ -5,5 +6,13 @@ export type LoaderLayoutProps = {
 } & PropsWithChildren;
 
 export function LoaderLayout({ children, isLoaded }: LoaderLayoutProps) {
-  return <>{isLoaded ? children : <>Loading...</>}</>;
+  return (
+    <>
+      {isLoaded ? (
+        children
+      ) : (
+        <LoadingOverlay visible={!isLoaded} overlayBlur={2} />
+      )}
+    </>
+  );
 }

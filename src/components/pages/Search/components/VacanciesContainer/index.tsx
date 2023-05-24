@@ -1,5 +1,4 @@
 import { Vacancy } from 'components/common';
-import { LoaderLayout } from 'components/layouts/LoaderLayout';
 import { useSearchVacancies } from 'hooks/useSearchVacancies';
 
 export type VacanciesContainerProps = {
@@ -14,7 +13,7 @@ export const VacanciesContainer = ({
   const { vacancies, isLoaded } = useSearchVacancies(activePage);
 
   return (
-    <LoaderLayout isLoaded={isLoaded}>
+    <>
       {vacancies.map((vacancy) => (
         <Vacancy
           currency={vacancy?.currency}
@@ -25,9 +24,10 @@ export const VacanciesContainer = ({
           typeOfWork={vacancy?.typeOfWork}
           key={vacancy?.id}
           id={vacancy?.id}
+          isLoaded={isLoaded}
           isSaved={saved.some((item) => item === vacancy?.id)}
         />
       ))}
-    </LoaderLayout>
+    </>
   );
 };

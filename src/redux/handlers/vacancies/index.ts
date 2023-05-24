@@ -10,7 +10,12 @@ export interface VacanciesState {
 }
 
 export const initialState: VacanciesState = {
-  data: [],
+  data: [
+    { id: 'vacancy-1' },
+    { id: 'vacancy-2' },
+    { id: 'vacancy-3' },
+    { id: 'vacancy-4' },
+  ] as unknown as IVacancy[],
   isLoaded: false,
 };
 

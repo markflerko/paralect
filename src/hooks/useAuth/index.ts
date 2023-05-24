@@ -10,19 +10,31 @@ export const useAuth = () => {
       const refreshToken = localStorage.getItem(
         process.env.REACT_APP_REFRESH_TOKEN_STORAGE_NAME as string,
       );
+      let accessToken;
       if (!refreshToken) {
-        const { refresh_token } = await dispatch(getAuthThunk()).unwrap();
+        const { refresh_token, access_token } = await dispatch(
+          getAuthThunk(),
+        ).unwrap();
+        accessToken = access_token;
         localStorage.setItem(
           process.env.REACT_APP_REFRESH_TOKEN_STORAGE_NAME as string,
           refresh_token,
         );
       } else {
-        const { refresh_token } = await dispatch(getRefreshThunk()).unwrap();
+        const { refresh_token, access_token } = await dispatch(
+          getRefreshThunk(),
+        ).unwrap();
+        accessToken = access_token;
         localStorage.setItem(
           process.env.REACT_APP_REFRESH_TOKEN_STORAGE_NAME as string,
           refresh_token,
         );
       }
+
+      localStorage.setItem(
+        process.env.REACT_APP_ACCESS_TOKEN_STORAGE_NAME as string,
+        accessToken,
+      );
     };
     authLogic();
   }, [dispatch]);

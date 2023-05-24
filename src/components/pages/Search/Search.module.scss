@@ -22,6 +22,12 @@
   }
 }
 
+.SecondColumnContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .PaginationContainer {
   margin-top: 1rem;
   justify-content: center;

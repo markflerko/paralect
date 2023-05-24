@@ -1,9 +1,11 @@
 import API from 'api';
 import { errorCaseResponse } from 'api/types';
 import { IVacanciesAPI, IVacanciesDto } from 'api/vacancies/types';
+import { getAccessToken } from 'utils/getAccessToken';
 
 const headers = {
   'X-Api-App-Id': process.env.REACT_APP_X_API_APP_ID as string,
+  Authorization: `Bearer ${getAccessToken()}` as string,
 };
 
 export default class VacancyAPI extends API implements IVacanciesAPI {

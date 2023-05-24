@@ -1,8 +1,10 @@
 import API from 'api';
 import { ICatalogueDto, ICataloguesAPI } from 'api/catalogues/types';
+import { getAccessToken } from 'utils/getAccessToken';
 
 const headers = {
   'X-Api-App-Id': process.env.REACT_APP_X_API_APP_ID as string,
+  Authorization: `Bearer ${getAccessToken()}` as string,
 };
 
 export default class CataloguesAPI extends API implements ICataloguesAPI {
