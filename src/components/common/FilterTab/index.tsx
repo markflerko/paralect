@@ -3,25 +3,43 @@ import Cancel from 'assets/images/Cancel.svg';
 import { Dropdown, MonetaryInput } from 'components/common';
 import { LoaderLayout } from 'components/layouts/LoaderLayout';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
-import { useCatalogues } from 'hooks/useCatalogues';
 import { useState } from 'react';
 import { setFilters } from 'redux/handlers/filters';
 import { getVacanciesThunk } from 'redux/thunks';
 import styles from './FilterTab.module.scss';
 
-export function FilterTab() {
+export type FilterTabProps = {
+  industriesTitles: string[];
+  industryKey: number | undefined;
+  isLoaded: boolean;
+  industry: string;
+  setIndustry: (value: string) => void;
+};
+
+export function FilterTab({
+  industriesTitles,
+  isLoaded,
+  industryKey,
+  setIndustry,
+  industry,
+}: FilterTabProps) {
   const dispatch = useAppDispatch();
 
-  const [industry, setIndustry] = useState('');
   const [paymentFrom, setPaymentFrom] = useState<number | ''>('');
   const [paymentTo, setPaymentTo] = useState<number | ''>('');
 
-  const { industriesTitles, key, isLoaded } = useCatalogues(industry);
   const filters = useAppSelector(({ filters }) => filters);
 
   const handleApply = () => {
-    dispatch(setFilters({ key, paymentFrom, paymentTo }));
-    dispatch(getVacanciesThunk({ ...filters, key, paymentFrom, paymentTo }));
+    dispatch(setFilters({ key: industryKey, paymentFrom, paymentTo }));
+    dispatch(
+      getVacanciesThunk({
+        ...filters,
+        key: industryKey,
+        paymentFrom,
+        paymentTo,
+      }),
+    );
   };
 
   const handleCancelClick = () => {
