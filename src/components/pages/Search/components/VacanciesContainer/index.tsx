@@ -1,6 +1,6 @@
-import { Vacancy } from 'components/Vacancy/Vacancy';
+import { Vacancy } from 'components/common/Vacancy/Vacancy';
+import { LoaderLayout } from 'components/layouts/LoaderLayout';
 import { useSearchVacancies } from 'hooks/useSearchVacancies';
-import { LoaderLayout } from 'layouts/LoaderLayout';
 
 export type VacanciesContainerProps = {
   activePage: number;

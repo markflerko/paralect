@@ -1,9 +1,9 @@
 import { Pagination } from '@mantine/core';
 import { vacanciesOnPage } from 'configuration';
-import { VacanciesContainer } from 'pages/Saved/components/VacanciesContainer';
 import { useEffect, useState } from 'react';
 import { getSavedVacancyIds } from 'utils/getSavedVacancyIds';
 import styles from './Saved.module.scss';
+import { VacanciesContainer } from 'components/pages/Saved/components/VacanciesContainer';
 
 export function Saved() {
   const savedVacancyIds = getSavedVacancyIds();

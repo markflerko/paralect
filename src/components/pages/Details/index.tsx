@@ -1,11 +1,11 @@
 import { Paper } from '@mantine/core';
+import { Vacancy } from 'components/common/Vacancy/Vacancy';
+import { LoaderLayout } from 'components/layouts/LoaderLayout';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
-import { LoaderLayout } from 'layouts/LoaderLayout';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getVacancyByIdThunk } from 'redux/thunks';
 import { isSavedVacancy } from 'utils/isSavedVacancy';
-import { Vacancy } from '../../components/Vacancy/Vacancy';
 import styles from './Details.module.scss';
 
 export function Details() {

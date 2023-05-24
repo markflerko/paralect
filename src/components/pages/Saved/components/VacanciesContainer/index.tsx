@@ -1,6 +1,6 @@
-import { Vacancy } from 'components/Vacancy/Vacancy';
+import { Vacancy } from 'components/common/Vacancy/Vacancy';
+import { LoaderLayout } from 'components/layouts/LoaderLayout';
 import { useSavedVacancies } from 'hooks/useSavedVacancies';
-import { LoaderLayout } from 'layouts/LoaderLayout';
 import { isSavedVacancy } from 'utils/isSavedVacancy';
 
 export type VacanciesContainerProps = {
