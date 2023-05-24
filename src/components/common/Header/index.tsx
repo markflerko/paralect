@@ -1,9 +1,9 @@
 import { Header, Text } from '@mantine/core';
+import Logo from 'assets/images/Logo.svg';
 import { useNavigate } from 'react-router-dom';
 import styles from './Header.module.scss';
-import Logo from 'assets/images/Logo.svg';
 
-export const CustomHeader = () => {
+export function CustomHeader() {
   const navigate = useNavigate();
 
   const handleSearchClick = () => {
@@ -29,4 +29,4 @@ export const CustomHeader = () => {
       </div>
     </Header>
   );
-};
+}

@@ -1,6 +1,5 @@
 import { Button, Pagination } from '@mantine/core';
-import FilterTab from 'components/common/FilterTab/FilterTab';
-import { SearchBar } from 'components/common/SearchBar/SearchBar';
+import { FilterTab, SearchBar } from 'components/common';
 import { VacanciesContainer } from 'components/pages/Search/components/VacanciesContainer';
 import { useState } from 'react';
 import { getSavedVacancyIds } from 'utils/getSavedVacancyIds';

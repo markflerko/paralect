@@ -7,7 +7,7 @@ export type SearchBarProps = {
   value: string;
 };
 
-export const Dropdown = ({ data, setIndustry, value }: SearchBarProps) => {
+export function Dropdown({ data, setIndustry, value }: SearchBarProps) {
   const handleChange = (value: string) => {
     setIndustry(value);
   };
@@ -24,4 +24,4 @@ export const Dropdown = ({ data, setIndustry, value }: SearchBarProps) => {
       data-elem="industry-select"
     />
   );
-};
+}

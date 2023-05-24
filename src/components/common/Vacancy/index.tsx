@@ -4,10 +4,10 @@ import Location from 'assets/images/Location.svg';
 import Star from 'assets/images/Star.svg';
 import StarActive from 'assets/images/StarActive.svg';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getSavedVacancyIds } from 'utils/getSavedVacancyIds';
 import { setSavedVacancyIds } from 'utils/setSavedVacancyIds';
 import styles from './Vacancy.module.scss';
-import { useNavigate } from 'react-router-dom';
 
 export type VacancyProps = {
   profession: string;
@@ -21,7 +21,7 @@ export type VacancyProps = {
   displayType?: 'details' | 'list';
 };
 
-export const Vacancy = ({
+export function Vacancy({
   profession,
   town,
   typeOfWork,
@@ -31,7 +31,7 @@ export const Vacancy = ({
   id,
   isSaved,
   displayType = 'list',
-}: VacancyProps) => {
+}: VacancyProps) {
   const navigate = useNavigate();
 
   const [isStarActive, setIsStarActive] = useState(isSaved ?? false);
@@ -104,4 +104,4 @@ export const Vacancy = ({
       </div>
     </Paper>
   );
-};
+}

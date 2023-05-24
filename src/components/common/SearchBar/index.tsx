@@ -6,7 +6,7 @@ import { getVacanciesThunk } from 'redux/thunks';
 import styles from './SearchBar.module.scss';
 import { SearchIcon } from './SearchIcon';
 
-export const SearchBar = () => {
+export function SearchBar() {
   const dispatch = useAppDispatch();
 
   const [query, setQuery] = useState<string>('');
@@ -44,4 +44,4 @@ export const SearchBar = () => {
       />
     </div>
   );
-};
+}

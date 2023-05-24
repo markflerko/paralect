@@ -1,16 +1,15 @@
 import { Button, Paper, Text, Title } from '@mantine/core';
 import Cancel from 'assets/images/Cancel.svg';
-import { Dropdown } from 'components/common/Dropdown/Dropdown';
+import { Dropdown, MonetaryInput } from 'components/common';
+import { LoaderLayout } from 'components/layouts/LoaderLayout';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { useCatalogues } from 'hooks/useCatalogues';
-import { LoaderLayout } from 'components/layouts/LoaderLayout';
 import { useState } from 'react';
 import { setFilters } from 'redux/handlers/filters';
 import { getVacanciesThunk } from 'redux/thunks';
 import styles from './FilterTab.module.scss';
-import { MonetaryInput } from 'components/common/NumberInput/NumberInput';
 
-export const FilterTab = () => {
+export function FilterTab() {
   const dispatch = useAppDispatch();
 
   const [industry, setIndustry] = useState('');
@@ -85,6 +84,4 @@ export const FilterTab = () => {
       </Paper>
     </LoaderLayout>
   );
-};
-
-export default FilterTab;
+}

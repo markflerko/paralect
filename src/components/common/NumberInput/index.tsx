@@ -7,12 +7,12 @@ export type NumberInputProps = {
   dataElem: string;
 };
 
-export const MonetaryInput = ({
+export function MonetaryInput({
   setValue,
   placeholder,
   value,
   dataElem,
-}: NumberInputProps) => {
+}: NumberInputProps) {
   const handleChange = (value: number) => {
     setValue(value);
   };
@@ -25,4 +25,4 @@ export const MonetaryInput = ({
       data-elem={dataElem}
     />
   );
-};
+}

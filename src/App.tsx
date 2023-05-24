@@ -1,11 +1,7 @@
+import { AppLayout, AuthLayout, LoaderLayout } from 'components/layouts';
+import { Details, NotFound, Saved, Search } from 'components/pages';
 import { useAuth } from 'hooks/useAuth';
-import { AppLayout, LoaderLayout } from 'components/layouts';
-import { AuthLayout } from 'components/layouts/AuthLayout';
 import { Route, Routes } from 'react-router-dom';
-import { Search } from 'components/pages/Search';
-import { Details } from 'components/pages/Details';
-import { Saved } from 'components/pages/Saved';
-import { NotFound } from 'components/pages/NotFound';
 
 export default function App() {
   const { isAuth, isError, isLoaded, message } = useAuth();

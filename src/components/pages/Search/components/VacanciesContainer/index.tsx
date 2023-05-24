@@ -1,4 +1,4 @@
-import { Vacancy } from 'components/common/Vacancy/Vacancy';
+import { Vacancy } from 'components/common';
 import { LoaderLayout } from 'components/layouts/LoaderLayout';
 import { useSearchVacancies } from 'hooks/useSearchVacancies';
 

@@ -1,5 +1,5 @@
 import { Paper } from '@mantine/core';
-import { Vacancy } from 'components/common/Vacancy/Vacancy';
+import { Vacancy } from 'components/common';
 import { LoaderLayout } from 'components/layouts/LoaderLayout';
 import { useAppDispatch, useAppSelector } from 'hooks/reduxHooks';
 import { useEffect } from 'react';
