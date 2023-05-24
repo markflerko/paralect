@@ -41,7 +41,7 @@ export const Vacancy = ({
   const fz = displayType === 'list' ? 'md' : 'xl';
 
   const handleStarClick = (event: any) => {
-    event.stopPropagation()
+    event.stopPropagation();
     let savedVacancyIds = getSavedVacancyIds();
     const index = savedVacancyIds.indexOf(id);
 
@@ -69,18 +69,23 @@ export const Vacancy = ({
       m="sm"
       className={styles.VacancyContainer}
       onClick={handleOnClick}
+      data-elem={`vacancy-${id}`}
     >
       <div className={styles.FirstRowContainer}>
         <Title order={titleOrder} color={titleColor} className={styles.Title}>
           {profession}
         </Title>
-        <div className={styles.Star} onClick={handleStarClick}>
+        <button
+          className={styles.Star}
+          onClick={handleStarClick}
+          data-elem={`vacancy-${id}-shortlist-button`}
+        >
           {isStarActive ? (
             <img src={StarActive} alt="StarActive" />
           ) : (
             <img src={Star} alt="Star" />
           )}
-        </div>
+        </button>
       </div>
       <div className={styles.SecondRowContainer}>
         <Text fw={700} fz={fz}>

@@ -33,10 +33,20 @@
   gap: 0.5rem;
 }
 
-.Star img {
-  margin-top: 4px;
-  height: 22px;
-  width: 22px;
+.Star {
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  :hover {
+    outline: auto #5e96fc;
+  }
+
+  img {
+    margin-top: 4px;
+    height: 22px;
+    width: 22px;
+  }
 }
 
 .Location img {

@@ -21,6 +21,7 @@ export const Dropdown = ({ data, setIndustry, value }: SearchBarProps) => {
       data={data}
       onChange={handleChange}
       value={value}
+      data-elem="industry-select"
     />
   );
 };

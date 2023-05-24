@@ -25,6 +25,7 @@ export const SearchBar = () => {
   return (
     <div className={styles.SearchBar}>
       <Input
+        data-elem="search-input"
         icon={<SearchIcon />}
         placeholder="Введите название вакансии"
         value={query}
@@ -35,6 +36,7 @@ export const SearchBar = () => {
             onClick={handleSearch}
             className={styles.Button}
             radius={'md'}
+            data-elem="search-button"
           >
             Поиск
           </Button>

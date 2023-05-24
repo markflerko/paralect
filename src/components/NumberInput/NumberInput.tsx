@@ -3,13 +3,15 @@ import { NumberInput } from '@mantine/core';
 export type NumberInputProps = {
   setValue: (value: number) => void;
   placeholder: string;
-  value: number | "";
+  value: number | '';
+  dataElem: string;
 };
 
 export const MonetaryInput = ({
   setValue,
   placeholder,
   value,
+  dataElem,
 }: NumberInputProps) => {
   const handleChange = (value: number) => {
     setValue(value);
@@ -20,6 +22,7 @@ export const MonetaryInput = ({
       onChange={handleChange}
       placeholder={placeholder}
       value={value}
+      data-elem={dataElem}
     />
   );
 };

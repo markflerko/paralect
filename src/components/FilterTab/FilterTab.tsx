@@ -64,15 +64,22 @@ export const FilterTab = () => {
               placeholder="От"
               setValue={setPaymentFrom}
               value={paymentFrom}
+              dataElem="salary-from-input"
             />
           </div>
           <MonetaryInput
             placeholder="До"
             setValue={setPaymentTo}
             value={paymentTo}
+            dataElem="salary-to-input"
           />
         </div>
-        <Button onClick={handleApply} className={styles.Button} radius={'md'}>
+        <Button
+          onClick={handleApply}
+          className={styles.Button}
+          radius={'md'}
+          data-elem="search-button"
+        >
           Применить
         </Button>
       </Paper>
