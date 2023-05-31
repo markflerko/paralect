@@ -10,6 +10,16 @@ export default class VacancyAPI extends API implements IVacanciesAPI {
       Authorization: `Bearer ${getAccessToken()}` as string,
     });
   }
+
+  private async getHeaders() {
+    const accessToken = await getAccessToken();
+
+    return {
+      'X-Api-App-Id': process.env.REACT_APP_X_API_APP_ID as string,
+      Authorization: `Bearer ${accessToken}` as string,
+    };
+  }
+
   public async getVacancies({
     page = 0,
     key = null,
@@ -32,10 +42,10 @@ export default class VacancyAPI extends API implements IVacanciesAPI {
       queryString += `&keyword=${keyword}`;
     }
 
-    console.log(queryString);
+    const headers = await this.getHeaders();
 
     return this.instance
-      .get(`vacancies?count=4&${queryString}`)
+      .get(`vacancies?count=4&${queryString}`, { headers })
       .then((res) => res.data.objects)
       .catch(() => []);
   }
@@ -50,8 +60,10 @@ export default class VacancyAPI extends API implements IVacanciesAPI {
   }
 
   public async getVacancyById(id: string) {
+    const headers = await this.getHeaders();
+
     return this.instance
-      .get(`vacancies/${id}`)
+      .get(`vacancies/${id}`, { headers })
       .then((res) => res.data)
       .catch(() => errorCaseResponse(id));
   }
